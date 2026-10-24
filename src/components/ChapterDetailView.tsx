@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ChapterInfo, UserTrainingRecord } from '../types/index.ts';
-import { ArrowLeft, Play, CheckCircle2, AlertCircle, Award, Clock, BookOpen, ExternalLink } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, AlertCircle, Award, Clock } from 'lucide-react';
 import { saveVideoPosition } from '../services/storageService.ts';
+import { VideoPlayer } from './VideoPlayer.tsx';
 
 interface ChapterDetailViewProps {
   chapter: ChapterInfo;
@@ -22,30 +23,10 @@ export const ChapterDetailView: React.FC<ChapterDetailViewProps> = ({
   const isPassed = assessment?.passed;
   const bestScore = assessment?.bestScore;
 
-  // Local simulated video position tracker
+  // Local video position tracker
   const [playbackSeconds, setPlaybackSeconds] = useState<number>(
     chProgress?.videoPosition || 0
   );
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  // Periodic autosave of video position (Requirement 3 & 9)
-  useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
-    if (isPlaying) {
-      interval = setInterval(() => {
-        setPlaybackSeconds((prev) => {
-          const next = prev + 5;
-          saveVideoPosition(chapter.id, next);
-          return next;
-        });
-      }, 5000);
-    }
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [isPlaying, chapter.id]);
-
-  const isPlaceholderDriveUrl = chapter.videoUrl.includes('REPLACE_WITH_DRIVE_URL');
 
   const formatPlaybackTime = (sec: number) => {
     const mins = Math.floor(sec / 60);
@@ -85,49 +66,18 @@ export const ChapterDetailView: React.FC<ChapterDetailViewProps> = ({
 
       {/* Embedded Video Player Component */}
       <div className="bg-slate-950 rounded-2xl overflow-hidden shadow-md border border-slate-800">
-        <div className="aspect-video w-full bg-slate-900 relative flex items-center justify-center">
-          {isPlaceholderDriveUrl ? (
-            /* Elegant Apple-style video standby player */
-            <div className="text-center p-6 max-w-md text-white space-y-3">
-              <div className="w-14 h-14 rounded-full bg-white/10 hover:bg-white/20 transition-colors mx-auto flex items-center justify-center cursor-pointer shadow-lg"
-                onClick={() => setIsPlaying(!isPlaying)}
-              >
-                <Play className="w-6 h-6 text-white ml-0.5" />
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-white tracking-wide">
-                  Training Video · {chapter.title}
-                </h4>
-                <p className="text-xs text-slate-400 mt-1">
-                  Duration: {chapter.duration} · Configured via single file in <code>src/data/chaptersData.ts</code>
-                </p>
-              </div>
-              <div className="pt-2 flex items-center justify-center gap-3 text-[11px] text-slate-400">
-                <span>Position: {formatPlaybackTime(playbackSeconds)}</span>
-                <span>·</span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const newPos = playbackSeconds + 30;
-                    setPlaybackSeconds(newPos);
-                    saveVideoPosition(chapter.id, newPos);
-                  }}
-                  className="text-blue-400 hover:text-blue-300 underline cursor-pointer"
-                >
-                  Simulate +30s Watch
-                </button>
-              </div>
-            </div>
-          ) : (
-            /* Real Google Drive or direct iframe video */
-            <iframe
-              src={chapter.videoUrl}
-              className="w-full h-full border-0"
-              allow="autoplay; encrypted-media; fullscreen"
-              title={chapter.title}
-            />
-          )}
-        </div>
+        <VideoPlayer
+          videoUrl={chapter.videoUrl}
+          title={chapter.title}
+          duration={chapter.duration}
+          playbackSeconds={playbackSeconds}
+          formatPlaybackTime={formatPlaybackTime}
+          onSimulateWatch={(seconds) => {
+            const newPos = playbackSeconds + seconds;
+            setPlaybackSeconds(newPos);
+            saveVideoPosition(chapter.id, newPos);
+          }}
+        />
 
         {/* Video Sub-bar */}
         <div className="bg-slate-900 px-4 py-3 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800">
