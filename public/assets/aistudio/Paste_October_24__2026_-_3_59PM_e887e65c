@@ -1,0 +1,1260 @@
+Build a complete, production-quality responsive web application called:
+
+# Education Sales Counselling Training
+
+This is a simple internal training and assessment platform for education counsellors.
+
+The application must be intentionally SIMPLE.
+
+Do NOT turn this into a complex LMS.
+
+The core user journey is:
+
+ENTER NAME → TRAINING DASHBOARD → 11 CHAPTERS → WATCH VIDEOS → TAKE INDIVIDUAL CHAPTER ASSESSMENTS → FINAL ASSESSMENT → RESULT → GENERATE/DOWNLOAD PDF ASSESSMENT REPORT.
+
+The user does NOT need to create an account.
+
+The user does NOT need a password.
+
+The user does NOT need OTP authentication.
+
+The user simply enters their name and starts.
+
+==================================================
+1. CORE REQUIREMENTS
+==================================================
+
+The application must support:
+
+1. User manually enters their name.
+2. Anyone can enter any name and use the platform.
+3. Generate a hidden unique local user/session ID for each new training record.
+4. Remember the user's training state persistently.
+5. State must survive:
+   - page refresh
+   - browser restart
+   - accidental tab closure
+   - navigating away and returning
+   - temporary internet loss
+   - logout
+6. Logout must NOT delete the user's saved training data.
+7. If the same user later enters the same name on the same browser/device, allow the application to recover the existing saved training record.
+8. Do NOT build passwords, OTPs, email authentication or account registration.
+9. Do NOT build an admin dashboard in V1.
+10. Do NOT build complicated analytics.
+11. Do NOT build gamification.
+12. Do NOT build chapter locking.
+13. Do NOT require 80%/90% video completion before assessment.
+14. Do NOT force users to complete chapters sequentially.
+15. Every chapter should be accessible at any time.
+16. Every chapter has its own video and its own assessment.
+17. There is one final assessment for the complete course.
+18. At the end, generate an Assessment Report.
+19. The user can download the PDF report multiple times.
+20. The report data must remain saved until the user chooses to reset/delete the local training record.
+
+==================================================
+2. USER IDENTITY
+==================================================
+
+The login/start screen must be extremely simple.
+
+Display:
+
+Education Sales Counselling Training
+
+Counsellor Training & Assessment
+
+Enter your name to begin.
+
+[ Full Name ]
+
+[ Start Training ]
+
+The user manually types their name.
+
+Do NOT show a predefined list of counsellors.
+
+Do NOT require email.
+
+Do NOT require password.
+
+Do NOT require OTP.
+
+When Start Training is clicked:
+
+- trim whitespace
+- validate that name is not empty
+- generate a unique hidden local ID if this is a new training record
+- save the name and session state persistently
+
+Example internal structure:
+
+{
+  userId: "generated-uuid",
+  name: "Rahul Sharma",
+  createdAt: "...",
+  lastActiveAt: "..."
+}
+
+The user does not need to see the UUID.
+
+==================================================
+3. PERSISTENCE / AUTOSAVE
+==================================================
+
+This is a CRITICAL requirement.
+
+Do not rely only on React state.
+
+All important state must be persisted using browser persistent storage.
+
+For V1, use localStorage for the main state.
+
+If a larger storage mechanism is genuinely required, IndexedDB may be used, but keep the implementation simple.
+
+The application must automatically save:
+
+- user name
+- user ID
+- current chapter
+- last opened chapter
+- video playback position for each chapter
+- chapter assessment answers
+- chapter assessment attempts
+- chapter assessment scores
+- chapter assessment best scores
+- chapter assessment completion status
+- final assessment answers
+- final assessment current question
+- final assessment attempts
+- final assessment scores
+- final assessment completion
+- final report data
+- report generated status
+- timestamps
+
+Every important interaction should autosave immediately.
+
+For example:
+
+When a user selects an answer:
+SAVE.
+
+When a user changes question:
+SAVE.
+
+When the video playback position changes:
+SAVE periodically.
+
+When an assessment starts:
+SAVE.
+
+When an assessment is submitted:
+SAVE.
+
+When the final report is generated:
+SAVE.
+
+Never allow a refresh to erase assessment answers.
+
+==================================================
+4. LOGOUT BEHAVIOUR
+==================================================
+
+Add a visible Logout button in the dashboard/header.
+
+Logout means:
+
+- clear the active UI/session state
+- return the user to the name-entry screen
+
+Logout MUST NOT delete stored training data.
+
+If the same person returns later and enters their name again on the same device/browser, recover the existing record.
+
+Do NOT implement a destructive logout.
+
+If desired, provide a separate hidden/internal "Reset Training Data" function for development/testing only.
+
+==================================================
+5. DASHBOARD
+==================================================
+
+After entering their name:
+
+Show:
+
+Welcome, [Name] 👋
+
+Education Sales Counselling Training
+
+Then show the 11 training chapters.
+
+Do not create complicated progress dashboards.
+
+The dashboard should simply show chapter cards and their assessment status.
+
+Example:
+
+01
+Introduction to Education Sales Counselling
+
+[ Open Chapter ]
+
+Assessment: Not Attempted
+
+02
+Understanding Leads & Education Counselling
+
+[ Open Chapter ]
+
+Assessment: 4/5 — Passed
+
+etc.
+
+At the bottom:
+
+FINAL ASSESSMENT
+
+[ Start Final Assessment ]
+
+If the final assessment has already been completed:
+
+Final Score: 86/100
+Status: PASSED
+
+[ View / Download Assessment Report ]
+
+==================================================
+6. NO CHAPTER LOCKING
+==================================================
+
+THIS IS VERY IMPORTANT.
+
+Do NOT implement prerequisite logic.
+
+Do NOT lock Chapter 2 until Chapter 1 is complete.
+
+Do NOT lock assessments until videos reach a percentage.
+
+Do NOT require all 11 chapters to be completed before the final assessment.
+
+Users can freely open any chapter at any time.
+
+Users can take any chapter assessment at any time.
+
+Users can retake assessments.
+
+The application is intentionally simple.
+
+==================================================
+7. CHAPTER STRUCTURE
+==================================================
+
+Use these 11 chapters:
+
+01 — Introduction to Education Sales Counselling
+
+02 — Understanding Leads & Education Counselling
+
+03 — Channels for Connectivity
+
+04 — Discovery & Learner Profiling
+
+05 — Counselling Content & First Conversation
+
+06 — Objection Handling
+
+07 — Follow-Up — Connected Leads
+
+08 — Follow-Up — RNR, WhatsApp, Email & AI
+
+09 — Closing the Sale & Creating Urgency
+
+10 — Closure Roleplay
+
+11 — Final Counselling & Closure Mindset
+
+Each chapter must contain:
+
+- chapter number
+- chapter title
+- video
+- simple video information
+- assessment button
+- assessment result/status
+
+==================================================
+8. VIDEO PLAYER
+==================================================
+
+Each chapter has a training video.
+
+Initially support Google Drive hosted videos.
+
+The videos should be embedded inside the application where technically possible so the user remains on the training website.
+
+Do not send the user away to a separate Google Drive page unnecessarily.
+
+Build the video component so the video URL can easily be replaced later.
+
+Use a configuration structure such as:
+
+chapters = [
+  {
+    id: 1,
+    title: "...",
+    videoUrl: "...",
+    ...
+  }
+]
+
+Do NOT hard-code video URLs throughout the UI.
+
+Make it easy to replace the placeholder URLs later.
+
+==================================================
+9. VIDEO PLAYBACK PERSISTENCE
+==================================================
+
+Do NOT use video completion percentage as an unlock mechanism.
+
+However, save the playback position.
+
+If the user watches until 18:43 and leaves:
+
+When they return, allow:
+
+Resume from 18:43
+
+This is only for convenience.
+
+It must NOT lock or unlock anything.
+
+If Google Drive's embedded player does not expose reliable playback position APIs, gracefully omit exact resume functionality rather than creating a fragile implementation.
+
+The rest of the training state must still persist.
+
+==================================================
+10. CHAPTER ASSESSMENTS
+==================================================
+
+Each of the 11 chapters has an individual assessment.
+
+Use the question bank supplied for this project.
+
+Each assessment should have:
+
+- title
+- question count
+- multiple-choice questions
+- optional practical questions where specified
+- answer selection
+- timer
+- next/previous navigation where appropriate
+- submit button
+- score calculation
+- pass/fail status
+- retake option
+
+Recommended chapter assessment passing score:
+
+70%.
+
+Passing an assessment does NOT unlock anything.
+
+It only records the result.
+
+==================================================
+11. ASSESSMENT TIMER
+==================================================
+
+Use a simple countdown timer.
+
+Example:
+
+Chapter Assessment
+Time Remaining: 05:00
+
+The timer should start when the assessment begins.
+
+If time reaches zero:
+
+Automatically submit the assessment.
+
+CRITICAL:
+
+The current timer state and answers must be persisted.
+
+If the page refreshes during an assessment, restore the assessment state instead of starting a completely new test.
+
+If technically appropriate, store an absolute assessment end timestamp rather than simply decrementing a counter in React state.
+
+Example:
+
+assessmentStartedAt
+assessmentEndsAt
+
+On reload:
+
+remainingTime = assessmentEndsAt - currentTime
+
+This prevents the timer from resetting when the browser is refreshed.
+
+==================================================
+12. ASSESSMENT RETAKES
+==================================================
+
+Allow unlimited retakes.
+
+Store:
+
+- number of attempts
+- latest score
+- best score
+- attempt history if practical
+
+Example:
+
+Attempt 1: 50%
+Attempt 2: 67%
+Attempt 3: 83%
+
+Display simply:
+
+Best Score: 83%
+Attempts: 3
+
+Do not create complicated analytics.
+
+==================================================
+13. QUESTION RANDOMIZATION
+==================================================
+
+For V1, DO NOT randomly shuffle questions unless it is implemented safely.
+
+Prefer a deterministic question order so the assessment report remains predictable.
+
+If option randomization is implemented, ensure the correct answer mapping remains correct.
+
+Simple and reliable is more important than sophistication.
+
+==================================================
+14. FINAL ASSESSMENT
+==================================================
+
+Create a separate Final Assessment page.
+
+Title:
+
+Education Sales Counselling
+
+Final Assessment
+
+Description:
+
+Test your understanding of the complete training program.
+
+30 Questions
+
+40 Minutes
+
+Passing Score: 75%
+
+[ Start Final Assessment ]
+
+Do NOT lock the final assessment behind chapter completion.
+
+The user may take it at any time.
+
+==================================================
+15. FINAL ASSESSMENT CONTENT
+==================================================
+
+Use the final 30-question assessment already defined for this project.
+
+Structure:
+
+Part A — Core Knowledge
+20 questions
+
+Part B — Scenario-Based Questions
+5 questions
+
+Part C — Practical Counselling Tasks
+5 questions
+
+Total: 30 questions
+
+Total score: 100 marks.
+
+Passing score: 75/100.
+
+The final assessment must support:
+
+- answers
+- navigation
+- timer
+- autosave
+- reload recovery
+- submission
+- scoring
+- result screen
+- retake
+
+==================================================
+16. FINAL ASSESSMENT PERSISTENCE
+==================================================
+
+This is CRITICAL.
+
+Suppose the user reaches:
+
+Question 17 / 30
+
+and refreshes the browser.
+
+The application must restore:
+
+- current question
+- all selected answers
+- remaining timer
+- assessment state
+
+Example:
+
+finalAssessment = {
+  status: "in_progress",
+  currentQuestion: 17,
+  answers: {
+    "1": "B",
+    "2": "A",
+    "3": "C"
+  },
+  startedAt: "...",
+  endsAt: "..."
+}
+
+On reload, show:
+
+Resume Final Assessment
+
+Do not lose the user's answers.
+
+==================================================
+17. FINAL RESULT PAGE
+==================================================
+
+After submission:
+
+Show a clean result screen.
+
+Example:
+
+Assessment Completed
+
+Rahul Sharma
+
+Education Sales Counselling
+
+FINAL SCORE
+
+86 / 100
+
+PASSED
+
+Then show:
+
+Core Knowledge
+34 / 40
+
+Scenario-Based Counselling
+26 / 30
+
+Practical Counselling
+26 / 30
+
+Total
+86 / 100
+
+Also show:
+
+Assessment Attempts: 1
+
+Then:
+
+[ Generate Assessment Report ]
+
+==================================================
+18. ASSESSMENT REPORT
+==================================================
+
+After the final assessment is completed, provide:
+
+Generate Assessment Report
+
+The report should contain:
+
+EDUCATION SALES COUNSELLING
+
+ASSESSMENT REPORT
+
+Candidate Name
+Date
+
+Final Score
+Status
+
+Section scores:
+
+Core Knowledge
+Scenario-Based Counselling
+Practical Counselling
+
+Chapter assessment summary:
+
+Chapter
+Score
+Status
+
+Include all 11 chapters.
+
+Then:
+
+Final Assessment Score
+Final Assessment Attempts
+Overall Status
+
+The report should look professional and printable.
+
+==================================================
+19. PDF GENERATION
+==================================================
+
+Generate an actual PDF.
+
+Use a reliable client-side PDF generation approach compatible with the chosen application stack.
+
+The PDF filename should be:
+
+[CandidateName]_Education_Sales_Counselling_Assessment_Report.pdf
+
+Example:
+
+Rahul_Sharma_Education_Sales_Counselling_Assessment_Report.pdf
+
+Sanitize filenames appropriately.
+
+==================================================
+20. PDF PERSISTENCE
+==================================================
+
+IMPORTANT:
+
+The report must remain available after it has been generated.
+
+Do not create a temporary PDF that disappears after the browser session.
+
+Store the underlying report data persistently.
+
+The user must be able to return later and click:
+
+Download Assessment Report
+
+multiple times.
+
+The report should be regenerated from the saved report data whenever necessary.
+
+Do not require the user to retake the final assessment just to download the report again.
+
+If practical, cache the generated PDF Blob locally, but the authoritative saved source should be the structured report data.
+
+==================================================
+21. REPORT DATA
+==================================================
+
+Store something similar to:
+
+finalReport: {
+  candidateName: "...",
+  generatedAt: "...",
+  finalScore: 86,
+  maximumScore: 100,
+  status: "PASSED",
+  sectionScores: {
+    coreKnowledge: 34,
+    scenarioBased: 26,
+    practical: 26
+  },
+  chapterResults: [
+    {
+      chapterId: 1,
+      score: 5,
+      total: 5,
+      status: "PASSED"
+    }
+  ],
+  finalAttempts: 1
+}
+
+This allows the PDF to be regenerated at any time.
+
+==================================================
+22. LOCAL STORAGE STRUCTURE
+==================================================
+
+Use a clear versioned storage key.
+
+Example:
+
+educationSalesCounsellingTraining_v1
+
+Possible structure:
+
+{
+  activeUserId: "...",
+
+  users: {
+    "...": {
+      userId: "...",
+      name: "...",
+      createdAt: "...",
+      lastActiveAt: "...",
+
+      currentChapterId: 4,
+
+      chapters: {
+        "1": {
+          videoPosition: 0,
+          assessment: {
+            attempts: [],
+            bestScore: null,
+            latestScore: null,
+            passed: false,
+            lastAnswers: {}
+          }
+        }
+      },
+
+      finalAssessment: {
+        status: "not_started",
+        currentQuestion: 0,
+        answers: {},
+        attempts: [],
+        bestScore: null,
+        latestScore: null,
+        passed: false,
+        startedAt: null,
+        endsAt: null
+      },
+
+      report: {
+        generated: false,
+        data: null
+      }
+    }
+  }
+}
+
+Keep the structure simple and readable.
+
+==================================================
+23. MULTIPLE USERS ON SAME DEVICE
+==================================================
+
+Because anyone can enter a name, support multiple local training records.
+
+Example:
+
+User A:
+Rahul Sharma
+
+User B:
+Sakshi Agarwal
+
+User C:
+Aman Kumar
+
+Do not overwrite the previous user's data simply because another name was entered.
+
+When a name is entered:
+
+- search existing local records by name
+- if found, offer to continue that record
+- if not found, create a new local record
+
+If two people use the exact same name, use the hidden generated userId to distinguish records where possible.
+
+Keep the interface simple.
+
+For example:
+
+"Continue Rahul Sharma's saved training?"
+
+[ Continue ]
+
+[ Start New ]
+
+Do not overcomplicate this flow.
+
+==================================================
+24. RESPONSIVE DESIGN
+==================================================
+
+The application must work beautifully on:
+
+- desktop
+- laptop
+- tablet
+- mobile
+
+Desktop:
+
+Left sidebar navigation.
+
+Mobile:
+
+Hamburger navigation or compact top navigation.
+
+Video player must be responsive.
+
+Assessment questions must be comfortable to read on mobile.
+
+Buttons must be touch-friendly.
+
+==================================================
+25. UI DESIGN
+==================================================
+
+Design direction:
+
+Professional
+Modern
+Minimal
+Clean
+Premium
+Corporate education/training
+
+Use:
+
+- light background
+- dark navy/charcoal typography
+- one strong accent color
+- rounded cards
+- subtle borders
+- restrained shadows
+- clean spacing
+- strong typography hierarchy
+
+Avoid:
+
+- excessive gradients
+- childish graphics
+- gamification
+- unnecessary animations
+- excessive charts
+- noisy dashboards
+
+The platform should look like a professional corporate training product.
+
+==================================================
+26. DASHBOARD NAVIGATION
+==================================================
+
+Use simple navigation:
+
+Dashboard
+
+Chapters
+
+Final Assessment
+
+Assessment Report
+
+Logout
+
+Do not add unnecessary sections.
+
+==================================================
+27. CHAPTER PAGE UX
+==================================================
+
+Example:
+
+Chapter 03
+
+Channels for Connectivity
+
+[ VIDEO PLAYER ]
+
+Description
+
+[ Take Assessment ]
+
+Assessment Status:
+
+Not Attempted
+
+or:
+
+Score: 6/6
+Passed
+
+Also provide:
+
+[ Back to Dashboard ]
+
+==================================================
+28. ASSESSMENT PAGE UX
+==================================================
+
+Show:
+
+Chapter 03 Assessment
+
+Question 1 of 6
+
+Time Remaining: 04:42
+
+Question text
+
+Answer options
+
+[ Previous ]
+[ Next ]
+
+At final question:
+
+[ Submit Assessment ]
+
+After submission:
+
+Score
+Status
+Best Score
+Attempts
+
+[ Retake ]
+[ Back to Dashboard ]
+
+==================================================
+29. FINAL ASSESSMENT UX
+==================================================
+
+Show:
+
+Final Assessment
+
+Question 1 of 30
+
+Time Remaining: 39:42
+
+Question
+
+Options
+
+Question navigation if useful.
+
+At the end:
+
+[ Submit Final Assessment ]
+
+After submission:
+
+Final result.
+
+==================================================
+30. NO DATA LOSS
+==================================================
+
+This is one of the highest-priority requirements.
+
+The application should never lose progress because of:
+
+- refresh
+- accidental browser closure
+- navigation
+- temporary connection loss
+- logout
+
+Use autosave aggressively.
+
+For assessment answers, save immediately on every answer selection.
+
+For video playback position, save periodically where technically possible.
+
+Use a versioned storage schema so future updates do not corrupt existing local data.
+
+Gracefully handle corrupted local storage by showing a safe recovery option rather than crashing.
+
+==================================================
+31. OFFLINE BEHAVIOUR
+==================================================
+
+The app should be as resilient as possible.
+
+Assessment state should remain available offline after the application has loaded.
+
+Use local state persistence.
+
+Do not require a backend connection simply to preserve assessment answers.
+
+Video playback may require internet depending on the Google Drive hosting method.
+
+If Google Drive is unavailable, show a clean message rather than crashing the application.
+
+==================================================
+32. RESET FUNCTION
+==================================================
+
+For development/testing only, implement a way to clear local training data.
+
+This should NOT be prominent in the user interface.
+
+Possible keyboard shortcut or developer-only button.
+
+Never accidentally expose a destructive reset beside Logout.
+
+==================================================
+33. ERROR HANDLING
+==================================================
+
+Do not let a single failed operation crash the entire app.
+
+Handle:
+
+- missing video URL
+- malformed saved state
+- localStorage errors
+- PDF generation errors
+- assessment state restoration errors
+
+Show friendly messages.
+
+Example:
+
+"We couldn't restore this assessment automatically. Your saved training data is still available."
+
+==================================================
+34. CONTENT SOURCE
+==================================================
+
+The training content and assessment questions are based on the education sales counselling material supplied for this project.
+
+Do not invent unrelated course material.
+
+Use the established terminology:
+
+- Education Sales Counselling
+- Lead
+- Profiling
+- Discovery
+- Channels
+- Phone
+- WhatsApp
+- Email
+- Objection Handling
+- Follow-Up
+- RNR
+- Closure
+- Urgency
+- Learner
+- Career aspirations
+
+Keep the assessment questions aligned with the actual course material.
+
+==================================================
+35. VIDEO CONFIGURATION
+==================================================
+
+Create a single easy-to-edit configuration file/object.
+
+Example:
+
+const chapters = [
+  {
+    id: 1,
+    number: "01",
+    title: "Introduction to Education Sales Counselling",
+    videoUrl: "REPLACE_WITH_DRIVE_URL",
+    assessmentId: "chapter-1"
+  },
+  ...
+]
+
+Do not scatter video URLs throughout components.
+
+I should be able to replace the 11 placeholder video URLs in one place.
+
+==================================================
+36. QUESTION CONFIGURATION
+==================================================
+
+Similarly, keep the assessment questions in structured data.
+
+Example:
+
+{
+  id: "ch1-q1",
+  chapterId: 1,
+  type: "mcq",
+  question: "...",
+  options: [
+    "...",
+    "...",
+    "...",
+    "..."
+  ],
+  correctAnswer: 1,
+  explanation: "..."
+}
+
+Keep questions separate from UI components.
+
+This will make it easy to edit the assessment later.
+
+==================================================
+37. IMPORTANT UX PHILOSOPHY
+==================================================
+
+Do not over-engineer.
+
+The user should understand the entire platform immediately.
+
+The application should feel like:
+
+"Enter name → Learn → Test → Get report."
+
+NOT:
+
+"Create account → Verify email → Complete profile → Unlock module → Earn points → Reach 80% → Unlock assessment → Complete prerequisite → Take final exam."
+
+Keep it simple.
+
+==================================================
+38. DEVELOPMENT REQUIREMENT
+==================================================
+
+Build the complete working application, not just a visual mockup.
+
+All buttons must work.
+
+All navigation must work.
+
+All assessments must calculate scores correctly.
+
+Timers must work.
+
+Autosave must work.
+
+Refresh recovery must work.
+
+Logout must work.
+
+Report generation must work.
+
+PDF download must work.
+
+Multiple downloads must work.
+
+Chapter navigation must work.
+
+The application must not contain dead buttons or placeholder functionality except for the 11 video URLs, which will be supplied separately.
+
+==================================================
+39. TESTING CHECKLIST
+==================================================
+
+Before considering the application complete, test the following:
+
+TEST 1:
+Enter name → dashboard appears.
+
+TEST 2:
+Refresh dashboard → name remains.
+
+TEST 3:
+Open Chapter 3 → video page appears.
+
+TEST 4:
+Select assessment answers → refresh → answers remain.
+
+TEST 5:
+Start assessment → refresh → timer does not reset.
+
+TEST 6:
+Submit chapter assessment → score saves.
+
+TEST 7:
+Retake assessment → second attempt saves.
+
+TEST 8:
+Open another chapter → previous chapter result remains.
+
+TEST 9:
+Logout → return to name screen.
+
+TEST 10:
+Enter the same name again → previous training record can be recovered.
+
+TEST 11:
+Start final assessment → answer questions → refresh → answers remain.
+
+TEST 12:
+Submit final assessment → final score calculates correctly.
+
+TEST 13:
+Generate assessment report → report appears.
+
+TEST 14:
+Download PDF → PDF opens correctly.
+
+TEST 15:
+Return to dashboard → report still exists.
+
+TEST 16:
+Click Download Report multiple times → each download works.
+
+TEST 17:
+Close browser → reopen → saved data remains.
+
+TEST 18:
+Test on mobile screen.
+
+TEST 19:
+Test with a second user name → first user's local record is not overwritten.
+
+TEST 20:
+Test an empty name → do not allow training to start.
+
+==================================================
+40. FINAL DELIVERABLE
+==================================================
+
+Deliver a polished, responsive, working Education Sales Counselling Training application.
+
+The final experience should be:
+
+1. Enter name.
+2. Start.
+3. See 11 chapters.
+4. Open any chapter.
+5. Watch video.
+6. Take that chapter's assessment.
+7. Score is saved.
+8. Move freely between chapters.
+9. Take final assessment whenever desired.
+10. Final score is calculated.
+11. Assessment report is generated.
+12. PDF can be downloaded repeatedly.
+13. All state survives refresh/restart/logout on the same browser/device.
+14. No complicated LMS features.
+
+Prioritize reliability, simplicity, persistence and clean UX over advanced architecture.
+
+Do not add features that were not requested.
+
+First build the complete functional application.
+Then verify every requirement in the testing checklist.
+Only after the functionality works should you polish the visual design.
