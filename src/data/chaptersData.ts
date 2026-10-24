@@ -115,7 +115,7 @@ export const CHAPTERS_DATA: ChapterInfo[] = [
       'The "Let me think about it" objection: isolating hidden doubts',
       'Handling competitor comparisons professionally without badmouthing'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_CH06/preview',
+    videoUrl: 'https://drive.google.com/file/d/1RSjfEVPjYmtb7NPMKRHC7txL5VCG9vFu/view?usp=drive_link',
     duration: '28 mins',
     assessmentQuestionCount: 5,
     passingPercentage: 70,
@@ -191,7 +191,7 @@ export const CHAPTERS_DATA: ChapterInfo[] = [
       'Spotting self-sabotaging counsellor mistakes (talking over the student)',
       'Actionable roleplay scorecard and peer feedback framework'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_CH10/preview',
+    videoUrl: 'https://drive.google.com/file/d/1HfxiEsc113pu2N6mu_Py2zEfbB2a5N2s/view?usp=drive_link',
     duration: '30 mins',
     assessmentQuestionCount: 5,
     passingPercentage: 70,
