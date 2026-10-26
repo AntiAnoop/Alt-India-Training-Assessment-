@@ -32,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
       label: 'Final Assessment',
       icon: allChaptersCleared ? Award : Lock,
       disabled: !allChaptersCleared,
-      lockBadge: !allChaptersCleared ? `${chaptersPassedCount}/11` : undefined
+      lockBadge: !allChaptersCleared ? `${chaptersPassedCount}/7` : undefined
     },
     { id: 'report', label: 'Assessment Report', icon: FileText, disabled: !hasReport && !hasFinalScore }
   ] as const;
@@ -63,10 +63,7 @@ export const Header: React.FC<HeaderProps> = ({
             />
             <div>
               <div className="text-sm font-bold text-slate-900 tracking-tight leading-none">
-                Alt India Sales Counselling
-              </div>
-              <div className="text-[11px] text-slate-500 font-normal tracking-wide mt-0.5">
-                Training & Assessment
+                Alt India Sales Counselling Training
               </div>
             </div>
           </div>

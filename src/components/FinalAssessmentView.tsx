@@ -28,12 +28,13 @@ export const FinalAssessmentView: React.FC<FinalAssessmentViewProps> = ({
   const finalState = user.finalAssessment;
   const questions = FINAL_ASSESSMENT_QUESTIONS;
 
-  // Verify all 11 chapters are cleared before allowing access
-  const totalChapters = CHAPTERS_DATA.length;
-  const chaptersPassedCount = Object.values(user.chapters).filter(
-    (ch) => ch.assessment.passed
+  // Verify all 7 theory modules are cleared before allowing access
+  const theoryModules = CHAPTERS_DATA.filter((ch) => ch.type === 'theory');
+  const totalTheoryCount = theoryModules.length; // 7
+  const chaptersPassedCount = theoryModules.filter(
+    (ch) => user.chapters[String(ch.id)]?.assessment?.passed
   ).length;
-  const allChaptersCleared = chaptersPassedCount === totalChapters;
+  const allChaptersCleared = chaptersPassedCount === totalTheoryCount;
 
   // Track if viewing result of latest submission or if state is completed
   const [showResultScreen, setShowResultScreen] = useState<boolean>(() => {
@@ -55,7 +56,7 @@ export const FinalAssessmentView: React.FC<FinalAssessmentViewProps> = ({
     return finalState.answers || {};
   });
 
-  // Calculate or initialize absolute endsAt timestamp properly via useState initializer
+  // 40-minute timer initialization
   const [endsAt, setEndsAt] = useState<number>(() => {
     if (finalState.endsAt && finalState.endsAt > Date.now()) {
       return finalState.endsAt;
@@ -97,7 +98,7 @@ export const FinalAssessmentView: React.FC<FinalAssessmentViewProps> = ({
 
     const updated = submitFinalAssessment(newAttempt);
 
-    // Auto-generate report data structure so user can immediately view/download report
+    // Auto-generate report data structure
     if (updated) {
       const chapterResults = CHAPTERS_DATA.map((ch) => {
         const chProg = updated.chapters[String(ch.id)];
@@ -105,10 +106,11 @@ export const FinalAssessmentView: React.FC<FinalAssessmentViewProps> = ({
           chapterId: ch.id,
           chapterNumber: ch.number,
           title: ch.title,
-          bestScore: chProg?.assessment.bestScore ?? null,
+          bestScore: ch.type === 'theory' ? (chProg?.assessment.bestScore ?? null) : null,
           totalQuestions: ch.assessmentQuestionCount,
-          passed: chProg?.assessment.passed ?? false,
-          attempts: chProg?.assessment.attempts.length ?? 0
+          passed: ch.type === 'theory' ? (chProg?.assessment.passed ?? false) : true,
+          attempts: chProg?.assessment.attempts.length ?? 0,
+          type: ch.type
         };
       });
 
@@ -121,9 +123,9 @@ export const FinalAssessmentView: React.FC<FinalAssessmentViewProps> = ({
         percentage: result.percentage,
         status: result.passed ? 'PASSED' : 'NEEDS RETAKE',
         sectionScores: {
-          coreKnowledge: { score: result.sectionScores.coreKnowledge, max: 40 },
-          scenarioBased: { score: result.sectionScores.scenarioBased, max: 30 },
-          practical: { score: result.sectionScores.practical, max: 30 }
+          coreKnowledge: { score: result.totalScore, max: result.maximumScore },
+          scenarioBased: { score: 0, max: 0 },
+          practical: { score: 0, max: 0 }
         },
         chapterResults,
         finalAttempts: updated.finalAssessment.attempts.length
@@ -158,14 +160,12 @@ export const FinalAssessmentView: React.FC<FinalAssessmentViewProps> = ({
     return () => clearInterval(timer);
   }, [showResultScreen]);
 
-  const currentQ = questions[currentIndex];
+  const currentQ = questions[currentIndex] || questions[0];
 
   const handleSelectAnswer = (optionIdx: number) => {
     if (!currentQ || showResultScreen) return;
     const newAnswers = { ...answers, [currentQ.id]: optionIdx };
     setAnswers(newAnswers);
-
-    // Immediate autosave (Requirement 3 & 16)
     saveFinalAssessmentAnswer(currentQ.id, optionIdx, currentIndex);
   };
 
@@ -186,7 +186,7 @@ export const FinalAssessmentView: React.FC<FinalAssessmentViewProps> = ({
     startFinalAssessment();
   };
 
-  // LOCK SCREEN IF CHAPTERS ARE NOT YET CLEARED
+  // LOCK SCREEN IF THEORY MODULES ARE NOT YET CLEARED
   if (!allChaptersCleared && (!latestAttempt || finalState.status !== 'completed')) {
     return (
       <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center space-y-6">
@@ -200,11 +200,15 @@ export const FinalAssessmentView: React.FC<FinalAssessmentViewProps> = ({
           </h2>
 
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md mx-auto">
-            You must complete and clear (≥ 70%) all 11 individual chapter assessments before you can unlock and attempt the comprehensive Final Assessment.
+            You must complete and clear (≥ 70%) all 7 theory module assessments before you can unlock and attempt the Final Assessment.
+          </p>
+
+          <p className="text-xs text-slate-400">
+            Modules 08 & 09 (Kannada Roleplays) are practical demonstrations and do not have assessments.
           </p>
 
           <div className="p-3 bg-slate-50 border border-slate-200/80 rounded-xl text-xs font-medium text-slate-700 max-w-xs mx-auto">
-            Current Progress: <strong className="text-slate-900">{chaptersPassedCount}</strong> of <strong className="text-slate-900">{totalChapters}</strong> Chapters Cleared
+            Current Progress: <strong className="text-slate-900">{chaptersPassedCount}</strong> of <strong className="text-slate-900">{totalTheoryCount}</strong> Theory Modules Cleared
           </div>
 
           <div className="pt-2">
@@ -212,7 +216,7 @@ export const FinalAssessmentView: React.FC<FinalAssessmentViewProps> = ({
               onClick={onBackToDashboard}
               className="py-2.5 px-6 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold transition-colors shadow-sm cursor-pointer"
             >
-              Go to Training Chapters
+              Go to Training Modules
             </button>
           </div>
         </div>
@@ -242,7 +246,7 @@ export const FinalAssessmentView: React.FC<FinalAssessmentViewProps> = ({
             {user.name}
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Alt India Sales Counselling · Final Assessment
+            Alt India Sales Counselling · Final Assessment (Modules 1–7)
           </p>
 
           {/* FINAL SCORE BANNER */}
@@ -251,37 +255,20 @@ export const FinalAssessmentView: React.FC<FinalAssessmentViewProps> = ({
               FINAL SCORE
             </div>
             <div className="text-5xl font-extrabold text-slate-900 tracking-tight mt-2">
-              {latestAttempt.totalScore} <span className="text-slate-400 font-normal text-2xl">/ 100</span>
+              {latestAttempt.totalScore} <span className="text-slate-400 font-normal text-2xl">/ 30</span>
+            </div>
+            <div className="text-sm font-semibold text-slate-700 mt-1">
+              {latestAttempt.percentage}% Score
             </div>
             <div className={`mt-3 px-3 py-1 text-xs font-bold rounded-md ${
               isPass ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
             }`}>
-              {isPass ? 'PASSED' : 'NEEDS RETAKE (Passing: 75/100)'}
-            </div>
-          </div>
-
-          {/* SECTION SCORES BREAKDOWN */}
-          <div className="max-w-md mx-auto space-y-2.5 text-left text-xs mb-8">
-            <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200/60">
-              <span className="font-medium text-slate-700">Core Knowledge (Part A)</span>
-              <span className="font-bold text-slate-900">{latestAttempt.sectionScores.coreKnowledge} / 40</span>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200/60">
-              <span className="font-medium text-slate-700">Scenario-Based Counselling (Part B)</span>
-              <span className="font-bold text-slate-900">{latestAttempt.sectionScores.scenarioBased} / 30</span>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200/60">
-              <span className="font-medium text-slate-700">Practical Counselling (Part C)</span>
-              <span className="font-bold text-slate-900">{latestAttempt.sectionScores.practical} / 30</span>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-slate-100 rounded-xl border border-slate-300 font-bold">
-              <span className="text-slate-900">Total</span>
-              <span className="text-slate-900">{latestAttempt.totalScore} / 100</span>
+              {isPass ? 'PASSED (≥ 75%)' : 'NEEDS RETAKE (Passing: 75%, 23/30)'}
             </div>
           </div>
 
           <div className="text-xs text-slate-500 pb-6 border-b border-slate-100">
-            Assessment Attempts: {finalState.attempts.length}
+            Assessment Attempts: {finalState.attempts.length} · 30 Questions · 40 Minutes
           </div>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
@@ -343,124 +330,112 @@ export const FinalAssessmentView: React.FC<FinalAssessmentViewProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-4 border-b border-slate-100 gap-2">
           <div>
             <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-              {currentQ.section === 'coreKnowledge'
-                ? 'Part A · Core Knowledge (2 Marks)'
-                : currentQ.section === 'scenarioBased'
-                ? 'Part B · Scenario-Based Questions (6 Marks)'
-                : 'Part C · Practical Counselling Tasks (6 Marks)'}
+              Comprehensive Final Assessment · Modules 1–7
             </div>
-            <div className="text-base font-bold text-slate-900 mt-0.5">
+            <h1 className="text-xl font-bold tracking-tight text-slate-900">
               Question {currentIndex + 1} of {questions.length}
-            </div>
+            </h1>
           </div>
 
-          <div className="text-xs text-slate-500">
-            Answered: <strong className="text-slate-900">{answeredCount}</strong> / {questions.length}
+          <div className="flex items-center gap-3 text-xs">
+            <span className="text-slate-500">
+              Answered: <strong className="text-slate-900">{answeredCount}</strong> / {questions.length}
+            </span>
+            <span className="text-slate-300">·</span>
+            <span className="text-slate-500">Passing: <strong>75% (23/30)</strong></span>
           </div>
         </div>
 
-        {/* Question Palette / Quick Jump Grid (All 30 Qs) */}
-        <div className="py-4 border-b border-slate-100">
-          <div className="text-[11px] font-medium text-slate-400 mb-2">Question Navigation:</div>
-          <div className="flex flex-wrap gap-1.5">
-            {questions.map((q, idx) => {
-              const isAnswered = answers[q.id] !== undefined;
-              const isCurrent = idx === currentIndex;
+        {/* Question Selector Numbers Grid */}
+        <div className="py-4 border-b border-slate-100 flex flex-wrap gap-1.5">
+          {questions.map((q, idx) => {
+            const isAnswered = answers[q.id] !== undefined;
+            const isCurrent = idx === currentIndex;
+
+            return (
+              <button
+                key={q.id}
+                onClick={() => handleNavigateQuestion(idx)}
+                className={`w-7 h-7 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+                  isCurrent
+                    ? 'bg-slate-900 text-white font-bold ring-2 ring-slate-900 ring-offset-1'
+                    : isAnswered
+                    ? 'bg-slate-100 text-slate-900 border border-slate-300'
+                    : 'bg-slate-50 text-slate-400 hover:bg-slate-100'
+                }`}
+                title={`Question ${idx + 1}`}
+              >
+                {idx + 1}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Question Content */}
+        <div className="py-6 space-y-6">
+          <h2 className="text-base sm:text-lg font-semibold text-slate-900 leading-snug">
+            {currentQ.question}
+          </h2>
+
+          <div className="space-y-3">
+            {currentQ.options.map((opt, optIdx) => {
+              const isSelected = answers[currentQ.id] === optIdx;
+              const optionLetters = ['A', 'B', 'C', 'D'];
 
               return (
                 <button
-                  key={q.id}
-                  type="button"
-                  onClick={() => handleNavigateQuestion(idx)}
-                  className={`w-7 h-7 text-[11px] rounded font-medium transition-all cursor-pointer ${
-                    isCurrent
-                      ? 'bg-slate-950 text-white font-bold ring-2 ring-slate-900 ring-offset-1'
-                      : isAnswered
-                      ? 'bg-slate-200 text-slate-800'
-                      : 'bg-slate-50 text-slate-400 hover:bg-slate-100 border border-slate-200'
+                  key={optIdx}
+                  onClick={() => handleSelectAnswer(optIdx)}
+                  className={`w-full text-left p-4 rounded-xl border text-xs sm:text-sm font-medium transition-all flex items-start gap-3 cursor-pointer ${
+                    isSelected
+                      ? 'border-slate-900 bg-slate-900 text-white shadow-sm'
+                      : 'border-slate-200 hover:border-slate-300 bg-white text-slate-800'
                   }`}
-                  title={`Jump to Question ${idx + 1}`}
                 >
-                  {idx + 1}
+                  <span className={`w-5 h-5 rounded-md flex items-center justify-center text-xs shrink-0 font-bold ${
+                    isSelected ? 'bg-white text-slate-900' : 'bg-slate-100 text-slate-600'
+                  }`}>
+                    {optionLetters[optIdx]}
+                  </span>
+                  <span className="leading-relaxed">{opt}</span>
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* Question Prompt */}
-        {currentQ && (
-          <div className="mt-6 space-y-6">
-            <h2 className="text-base sm:text-lg font-semibold text-slate-900 leading-relaxed">
-              {currentQ.question}
-            </h2>
-
-            <div className="space-y-3">
-              {currentQ.options.map((option, optIdx) => {
-                const isSelected = answers[currentQ.id] === optIdx;
-
-                return (
-                  <button
-                    key={optIdx}
-                    type="button"
-                    onClick={() => handleSelectAnswer(optIdx)}
-                    className={`w-full text-left p-4 rounded-xl border text-xs sm:text-sm transition-all flex items-start gap-3.5 cursor-pointer ${
-                      isSelected
-                        ? 'border-slate-900 bg-slate-50 text-slate-950 font-medium ring-1 ring-slate-900'
-                        : 'border-slate-200 bg-white hover:bg-slate-50 text-slate-700'
-                    }`}
-                  >
-                    <span className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 mt-0.5 text-xs font-semibold ${
-                      isSelected
-                        ? 'border-slate-900 bg-slate-900 text-white'
-                        : 'border-slate-300 text-slate-500'
-                    }`}>
-                      {String.fromCharCode(65 + optIdx)}
-                    </span>
-                    <span className="leading-relaxed">{option}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* Bottom Pagination & Submit */}
-        <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
+        {/* Footer Navigation */}
+        <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
           <button
-            type="button"
             onClick={() => handleNavigateQuestion(Math.max(0, currentIndex - 1))}
             disabled={currentIndex === 0}
-            className={`px-4 py-2 text-xs font-medium rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
+            className={`py-2 px-4 rounded-xl text-xs font-medium flex items-center gap-1.5 transition-colors ${
               currentIndex === 0
                 ? 'text-slate-300 cursor-not-allowed'
-                : 'text-slate-700 hover:bg-slate-100'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer'
             }`}
           >
-            <ChevronLeft className="w-3.5 h-3.5" />
+            <ChevronLeft className="w-4 h-4" />
             <span>Previous</span>
           </button>
 
-          <div className="flex items-center gap-3">
-            {currentIndex < questions.length - 1 ? (
-              <button
-                type="button"
-                onClick={() => handleNavigateQuestion(Math.min(questions.length - 1, currentIndex + 1))}
-                className="py-2.5 px-5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
-              >
-                <span>Next</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            ) : null}
-
+          {currentIndex < questions.length - 1 ? (
             <button
-              type="button"
-              onClick={() => handleSubmit()}
-              className="py-2.5 px-6 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg transition-colors shadow-sm cursor-pointer"
+              onClick={() => handleNavigateQuestion(currentIndex + 1)}
+              className="py-2.5 px-5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-medium transition-colors shadow-sm flex items-center gap-1.5 cursor-pointer"
             >
-              Submit Final Assessment
+              <span>Next</span>
+              <ArrowRight className="w-4 h-4" />
             </button>
-          </div>
+          ) : (
+            <button
+              onClick={() => handleSubmit()}
+              className="py-2.5 px-6 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold transition-colors shadow-sm flex items-center gap-1.5 cursor-pointer"
+            >
+              <CheckCircle2 className="w-4 h-4" />
+              <span>Submit Final Assessment</span>
+            </button>
+          )}
         </div>
       </div>
     </div>

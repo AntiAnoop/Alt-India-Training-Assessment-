@@ -154,11 +154,12 @@ export default function App() {
   const hasReport = currentUser.report.generated && currentUser.report.data !== null;
   const hasFinalScore = currentUser.finalAssessment.latestScore !== null;
 
-  const totalChapters = CHAPTERS_DATA.length;
-  const chaptersPassedCount = Object.values(currentUser.chapters).filter(
-    (ch) => ch.assessment.passed
+  const theoryModules = CHAPTERS_DATA.filter((c) => c.type === 'theory');
+  const totalTheoryCount = theoryModules.length;
+  const chaptersPassedCount = theoryModules.filter(
+    (ch) => currentUser.chapters[String(ch.id)]?.assessment?.passed
   ).length;
-  const allChaptersCleared = chaptersPassedCount === totalChapters;
+  const allChaptersCleared = chaptersPassedCount === totalTheoryCount;
 
   return (
     <div className="min-h-screen bg-[#f5f5f7] flex flex-col text-slate-900">

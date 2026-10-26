@@ -73,9 +73,6 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
             Alt India Sales Counselling Training
           </h1>
-          <p className="mt-2 text-xs sm:text-sm font-medium text-slate-500 tracking-wide uppercase">
-            Counsellor Training & Assessment
-          </p>
 
           <p className="mt-6 text-sm text-slate-600">
             Enter your name to begin.

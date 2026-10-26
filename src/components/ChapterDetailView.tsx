@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChapterInfo, UserTrainingRecord } from '../types/index.ts';
-import { ArrowLeft, CheckCircle2, AlertCircle, Award, Clock } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, AlertCircle, Award, Headphones } from 'lucide-react';
 import { saveVideoPosition } from '../services/storageService.ts';
 import { VideoPlayer } from './VideoPlayer.tsx';
 
@@ -18,6 +18,7 @@ export const ChapterDetailView: React.FC<ChapterDetailViewProps> = ({
   onStartAssessment
 }) => {
   const chProgress = user.chapters[String(chapter.id)];
+  const isRoleplay = chapter.type === 'roleplay';
   const assessment = chProgress?.assessment;
   const hasAttempted = assessment && assessment.attempts.length > 0;
   const isPassed = assessment?.passed;
@@ -47,7 +48,7 @@ export const ChapterDetailView: React.FC<ChapterDetailViewProps> = ({
         </button>
 
         <span className="text-xs font-mono font-semibold text-slate-400">
-          Module {chapter.number} of 11
+          Module {chapter.number} of 09
         </span>
       </div>
 
@@ -69,7 +70,6 @@ export const ChapterDetailView: React.FC<ChapterDetailViewProps> = ({
         <VideoPlayer
           videoUrl={chapter.videoUrl}
           title={chapter.title}
-          duration={chapter.duration}
           playbackSeconds={playbackSeconds}
           formatPlaybackTime={formatPlaybackTime}
           onSimulateWatch={(seconds) => {
@@ -79,24 +79,13 @@ export const ChapterDetailView: React.FC<ChapterDetailViewProps> = ({
           }}
         />
 
-        {/* Video Sub-bar */}
-        <div className="bg-slate-900 px-4 py-3 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800">
-          <div className="flex items-center gap-2">
-            <Clock className="w-3.5 h-3.5 text-slate-400" />
-            <span>Video Duration: {chapter.duration}</span>
-            {playbackSeconds > 0 && (
-              <>
-                <span>·</span>
-                <span className="text-slate-300">
-                  Last position: {formatPlaybackTime(playbackSeconds)}
-                </span>
-              </>
-            )}
+        {playbackSeconds > 0 && (
+          <div className="bg-slate-900 px-4 py-2.5 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800">
+            <span className="text-slate-300">
+              Last playback position: {formatPlaybackTime(playbackSeconds)}
+            </span>
           </div>
-          <span className="text-[11px] text-slate-400">
-            No watch lock required · Assessment open anytime
-          </span>
-        </div>
+        )}
       </div>
 
       {/* Description & Key Learning Points */}
@@ -125,46 +114,76 @@ export const ChapterDetailView: React.FC<ChapterDetailViewProps> = ({
         </div>
       </div>
 
-      {/* Assessment Action Card */}
-      <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-        <div>
-          <div className="flex items-center gap-2">
-            <Award className="w-4 h-4 text-slate-700" />
-            <h3 className="text-base font-bold text-slate-900">
-              Chapter {chapter.number} Assessment
-            </h3>
-          </div>
-          <p className="text-xs text-slate-500 mt-1">
-            5 Multiple Choice Questions · Passing Score: 70% (4/5) · Unlimited retakes
-          </p>
+      {/* Bottom Action Area: Roleplay Demonstration vs Theory Assessment Card */}
+      {isRoleplay ? (
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+          <div>
+            <div className="flex items-center gap-2">
+              <Headphones className="w-4 h-4 text-amber-700" />
+              <h3 className="text-base font-bold text-slate-900">
+                {chapter.title}
+              </h3>
+            </div>
+            <p className="text-xs text-slate-500 mt-1">
+              {chapter.subtitle}
+            </p>
 
-          {/* Assessment status display */}
-          <div className="mt-3">
-            {!hasAttempted ? (
-              <span className="text-xs text-slate-500">
-                Assessment Status: <strong className="font-medium text-slate-700">Not Attempted</strong>
+            <div className="mt-3 flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 text-xs text-emerald-800 bg-emerald-50 border border-emerald-200/60 px-3 py-1 rounded-lg font-medium">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Audio Observation · No Assessment Required</span>
               </span>
-            ) : isPassed ? (
-              <div className="inline-flex items-center gap-1.5 text-xs text-emerald-700 font-semibold">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span>Score: {bestScore}/5 — Passed (Attempts: {assessment?.attempts.length})</span>
-              </div>
-            ) : (
-              <div className="inline-flex items-center gap-1.5 text-xs text-amber-700 font-semibold">
-                <AlertCircle className="w-4 h-4 text-amber-600" />
-                <span>Score: {bestScore}/5 — Retake Recommended (Attempts: {assessment?.attempts.length})</span>
-              </div>
-            )}
+            </div>
+          </div>
+
+          <div className="shrink-0">
+            <span className="inline-block py-2.5 px-4 bg-amber-50 text-amber-800 rounded-xl text-xs font-semibold border border-amber-200/60">
+              Roleplay Session
+            </span>
           </div>
         </div>
+      ) : (
+        /* Theory Assessment Action Card */
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+          <div>
+            <div className="flex items-center gap-2">
+              <Award className="w-4 h-4 text-slate-700" />
+              <h3 className="text-base font-bold text-slate-900">
+                Module {chapter.number} Assessment
+              </h3>
+            </div>
+            <p className="text-xs text-slate-500 mt-1">
+              {chapter.assessmentQuestionCount} Multiple Choice Questions · Passing Score: 70% · Unlimited retakes
+            </p>
 
-        <button
-          onClick={() => onStartAssessment(chapter.id)}
-          className="py-3 px-6 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs sm:text-sm font-medium transition-colors shadow-sm flex items-center justify-center gap-2 cursor-pointer shrink-0"
-        >
-          <span>{hasAttempted ? 'Retake Assessment' : 'Take Assessment'}</span>
-        </button>
-      </div>
+            {/* Assessment status display */}
+            <div className="mt-3">
+              {!hasAttempted ? (
+                <span className="text-xs text-slate-500">
+                  Assessment Status: <strong className="font-medium text-slate-700">Not Attempted</strong>
+                </span>
+              ) : isPassed ? (
+                <div className="inline-flex items-center gap-1.5 text-xs text-emerald-700 font-semibold">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span>Score: {bestScore}/{chapter.assessmentQuestionCount} — Passed (Attempts: {assessment?.attempts.length})</span>
+                </div>
+              ) : (
+                <div className="inline-flex items-center gap-1.5 text-xs text-amber-700 font-semibold">
+                  <AlertCircle className="w-4 h-4 text-amber-600" />
+                  <span>Score: {bestScore}/{chapter.assessmentQuestionCount} — Retake Recommended (Attempts: {assessment?.attempts.length})</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <button
+            onClick={() => onStartAssessment(chapter.id)}
+            className="py-3 px-6 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs sm:text-sm font-medium transition-colors shadow-sm flex items-center justify-center gap-2 cursor-pointer shrink-0"
+          >
+            <span>{hasAttempted ? 'Retake Assessment' : 'Take Assessment'}</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

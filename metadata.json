@@ -1,5 +1,5 @@
 {
-  "name": "Education Sales Counselling Training",
+  "name": "Alt India Sales Counselling Training",
   "description": "Simple internal training and assessment platform for education sales counsellors with chapter modules, assessments, and verifiable PDF report generation.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

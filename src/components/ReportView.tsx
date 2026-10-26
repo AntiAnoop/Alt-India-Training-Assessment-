@@ -3,7 +3,7 @@ import { UserTrainingRecord, FinalReportData } from '../types/index.ts';
 import { CHAPTERS_DATA } from '../data/chaptersData.ts';
 import { generateAssessmentReportPDF } from '../services/pdfService.ts';
 import { saveFinalReport } from '../services/storageService.ts';
-import { ArrowLeft, Download, CheckCircle2, AlertCircle, Printer, Award, FileText } from 'lucide-react';
+import { ArrowLeft, Download, CheckCircle2, AlertCircle, Printer, FileText } from 'lucide-react';
 
 interface ReportViewProps {
   user: UserTrainingRecord;
@@ -29,25 +29,30 @@ export const ReportView: React.FC<ReportViewProps> = ({
         chapterId: ch.id,
         chapterNumber: ch.number,
         title: ch.title,
-        bestScore: chProg?.assessment.bestScore ?? null,
+        bestScore: ch.type === 'theory' ? (chProg?.assessment.bestScore ?? null) : null,
         totalQuestions: ch.assessmentQuestionCount,
-        passed: chProg?.assessment.passed ?? false,
-        attempts: chProg?.assessment.attempts.length ?? 0
+        passed: ch.type === 'theory' ? (chProg?.assessment.passed ?? false) : true,
+        attempts: chProg?.assessment.attempts.length ?? 0,
+        type: ch.type
       };
     });
+
+    const finalScore = user.finalAssessment.latestScore ?? 0;
+    const maxScore = 30;
+    const percentage = Math.round((finalScore / maxScore) * 100);
 
     reportData = {
       candidateName: user.name,
       userId: user.userId,
       generatedAt: new Date().toISOString(),
-      finalScore: user.finalAssessment.latestScore,
-      maximumScore: 100,
-      percentage: Math.round((user.finalAssessment.latestScore / 100) * 100),
+      finalScore,
+      maximumScore: maxScore,
+      percentage,
       status: user.finalAssessment.passed ? 'PASSED' : 'NEEDS RETAKE',
       sectionScores: {
-        coreKnowledge: { score: latestAttempt?.sectionScores.coreKnowledge ?? 0, max: 40 },
-        scenarioBased: { score: latestAttempt?.sectionScores.scenarioBased ?? 0, max: 30 },
-        practical: { score: latestAttempt?.sectionScores.practical ?? 0, max: 30 }
+        coreKnowledge: { score: finalScore, max: maxScore },
+        scenarioBased: { score: 0, max: 0 },
+        practical: { score: 0, max: 0 }
       },
       chapterResults,
       finalAttempts: user.finalAssessment.attempts.length
@@ -148,7 +153,7 @@ export const ReportView: React.FC<ReportViewProps> = ({
                 ALT INDIA SALES COUNSELLING
               </h1>
               <p className="text-xs text-slate-500 mt-0.5">
-                Counsellor Training & Verification Matrix
+                Counsellor Training & Verification Matrix (Modules 1–7 Theory + 2 Roleplays)
               </p>
             </div>
 
@@ -186,10 +191,10 @@ export const ReportView: React.FC<ReportViewProps> = ({
               Final Assessment Score
             </div>
             <div className="text-xl font-bold text-slate-900 mt-1">
-              {reportData.finalScore} <span className="text-xs font-normal text-slate-400">/ 100</span>
+              {reportData.finalScore} <span className="text-xs font-normal text-slate-400">/ {reportData.maximumScore}</span>
             </div>
             <div className="text-[11px] text-slate-500 mt-0.5">
-              Attempts: {reportData.finalAttempts} · Passing: 75/100
+              {reportData.percentage}% Score · Passing: 75% ({Math.ceil(reportData.maximumScore * 0.75)}/{reportData.maximumScore})
             </div>
           </div>
 
@@ -216,80 +221,63 @@ export const ReportView: React.FC<ReportViewProps> = ({
           </div>
         </div>
 
-        {/* Section Scores Breakdown */}
-        <div>
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
-            Sectional Performance
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-            <div className="p-4 rounded-xl border border-slate-200/80 bg-white">
-              <div className="text-slate-500 font-medium">Part A · Core Knowledge</div>
-              <div className="text-lg font-bold text-slate-900 mt-1">
-                {reportData.sectionScores.coreKnowledge.score} / {reportData.sectionScores.coreKnowledge.max}
-              </div>
-              <div className="text-[11px] text-slate-400 mt-0.5">20 Questions · 2 Marks each</div>
-            </div>
-
-            <div className="p-4 rounded-xl border border-slate-200/80 bg-white">
-              <div className="text-slate-500 font-medium">Part B · Scenario-Based</div>
-              <div className="text-lg font-bold text-slate-900 mt-1">
-                {reportData.sectionScores.scenarioBased.score} / {reportData.sectionScores.scenarioBased.max}
-              </div>
-              <div className="text-[11px] text-slate-400 mt-0.5">5 Scenarios · 6 Marks each</div>
-            </div>
-
-            <div className="p-4 rounded-xl border border-slate-200/80 bg-white">
-              <div className="text-slate-500 font-medium">Part C · Practical Tasks</div>
-              <div className="text-lg font-bold text-slate-900 mt-1">
-                {reportData.sectionScores.practical.score} / {reportData.sectionScores.practical.max}
-              </div>
-              <div className="text-[11px] text-slate-400 mt-0.5">5 Tasks · 6 Marks each</div>
-            </div>
-          </div>
+        {/* Curriculum Architecture Notice */}
+        <div className="p-4 bg-slate-50 rounded-xl border border-slate-200/70 text-xs text-slate-600 leading-relaxed">
+          <strong className="text-slate-900 font-semibold">Curriculum Assessment Architecture:</strong> The Final Assessment comprises 30 questions derived strictly from Theory Modules 1–7. Modules 08 & 09 (Kannada Roleplays) are observational demonstrations with no assessment requirements.
         </div>
 
-        {/* 11 Chapters Summary Matrix */}
+        {/* Modules Summary Matrix */}
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
-            Chapter Assessment Summary (11 Chapters)
+            Module Assessment Summary Matrix
           </h2>
           <div className="border border-slate-200 rounded-xl overflow-hidden">
             <table className="w-full text-left text-xs">
               <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-medium">
                 <tr>
                   <th className="py-2.5 px-4 font-semibold w-14">#</th>
-                  <th className="py-2.5 px-4 font-semibold">Chapter Title</th>
-                  <th className="py-2.5 px-4 font-semibold text-center w-24">Score</th>
-                  <th className="py-2.5 px-4 font-semibold text-center w-28">Status</th>
+                  <th className="py-2.5 px-4 font-semibold">Module Title</th>
+                  <th className="py-2.5 px-4 font-semibold text-center w-28">Score</th>
+                  <th className="py-2.5 px-4 font-semibold text-center w-36">Status</th>
                   <th className="py-2.5 px-4 font-semibold text-right w-24">Attempts</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {reportData.chapterResults.map((ch) => (
-                  <tr key={ch.chapterId} className="hover:bg-slate-50/50">
-                    <td className="py-2.5 px-4 font-mono font-medium text-slate-400">
-                      {ch.chapterNumber}
-                    </td>
-                    <td className="py-2.5 px-4 font-medium text-slate-800">
-                      {ch.title}
-                    </td>
-                    <td className="py-2.5 px-4 text-center font-semibold text-slate-700">
-                      {ch.bestScore !== null ? `${ch.bestScore}/${ch.totalQuestions}` : '—'}
-                    </td>
-                    <td className="py-2.5 px-4 text-center">
-                      {ch.passed ? (
-                        <span className="text-emerald-700 font-semibold">Passed</span>
-                      ) : ch.bestScore !== null ? (
-                        <span className="text-amber-700 font-medium">Retake</span>
-                      ) : (
-                        <span className="text-slate-400">Unattempted</span>
-                      )}
-                    </td>
-                    <td className="py-2.5 px-4 text-right text-slate-500">
-                      {ch.attempts}
-                    </td>
-                  </tr>
-                ))}
+                {reportData.chapterResults.map((ch) => {
+                  const isRoleplay = ch.type === 'roleplay' || ch.chapterId === 8 || ch.chapterId === 9;
+
+                  return (
+                    <tr key={ch.chapterId} className="hover:bg-slate-50/50">
+                      <td className="py-2.5 px-4 font-mono font-medium text-slate-400">
+                        {ch.chapterNumber}
+                      </td>
+                      <td className="py-2.5 px-4 font-medium text-slate-800">
+                        {ch.title}
+                      </td>
+                      <td className="py-2.5 px-4 text-center font-semibold text-slate-700">
+                        {isRoleplay
+                          ? '—'
+                          : ch.bestScore !== null
+                          ? `${ch.bestScore}/${ch.totalQuestions}`
+                          : '—'}
+                      </td>
+                      <td className="py-2.5 px-4 text-center">
+                        {isRoleplay ? (
+                          <span className="text-slate-500 italic text-[11px]">Roleplay — No Assessment</span>
+                        ) : ch.passed ? (
+                          <span className="text-emerald-700 font-semibold">Passed (≥ 70%)</span>
+                        ) : ch.bestScore !== null ? (
+                          <span className="text-amber-700 font-medium">Retake</span>
+                        ) : (
+                          <span className="text-slate-400">Unattempted</span>
+                        )}
+                      </td>
+                      <td className="py-2.5 px-4 text-right text-slate-500">
+                        {isRoleplay ? '—' : ch.attempts}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

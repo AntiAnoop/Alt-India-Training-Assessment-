@@ -20,7 +20,7 @@ export interface FinalScoreResult {
 }
 
 /**
- * Calculates individual chapter assessment score.
+ * Calculates individual module assessment score.
  * Passing threshold is 70%.
  */
 export function calculateChapterScore(
@@ -52,51 +52,35 @@ export function calculateChapterScore(
 
 /**
  * Calculates Final Comprehensive Assessment Score.
- * Total marks: 100. Passing: 75/100 (75%).
- * Section marks:
- * - coreKnowledge: 20 Qs * 2 marks = 40 max
- * - scenarioBased: 5 Qs * 6 marks = 30 max
- * - practical: 5 Qs * 6 marks = 30 max
+ * 30 questions based strictly on Modules 1–7.
+ * Passing threshold: 75% (score percentage = correct answers / 30 * 100).
  */
 export function calculateFinalScore(
   answers: Record<string, number>,
   questions: Question[]
 ): FinalScoreResult {
-  let coreScore = 0;
-  let scenarioScore = 0;
-  let practicalScore = 0;
+  const totalQuestions = questions.length || 30;
+  let correctCount = 0;
 
   for (const q of questions) {
     const isCorrect = answers[q.id] !== undefined && answers[q.id] === q.correctAnswer;
-    const marks = q.marks ?? 2;
-
     if (isCorrect) {
-      if (q.section === 'coreKnowledge') {
-        coreScore += marks;
-      } else if (q.section === 'scenarioBased') {
-        scenarioScore += marks;
-      } else if (q.section === 'practical') {
-        practicalScore += marks;
-      } else {
-        coreScore += marks;
-      }
+      correctCount += 1;
     }
   }
 
-  const totalScore = coreScore + scenarioScore + practicalScore;
-  const maximumScore = 100;
-  const percentage = Math.round((totalScore / maximumScore) * 100);
-  const passed = totalScore >= 75;
+  const percentage = Math.round((correctCount / totalQuestions) * 100);
+  const passed = percentage >= 75;
 
   return {
-    totalScore,
-    maximumScore,
+    totalScore: correctCount,
+    maximumScore: totalQuestions,
     percentage,
     passed,
     sectionScores: {
-      coreKnowledge: coreScore,
-      scenarioBased: scenarioScore,
-      practical: practicalScore
+      coreKnowledge: correctCount,
+      scenarioBased: 0,
+      practical: 0
     }
   };
 }
@@ -114,7 +98,7 @@ export function formatSeconds(totalSeconds: number): string {
 
 /**
  * Sanitizes candidate name for standard PDF export filename.
- * Requirement: [CandidateName]_Education_Sales_Counselling_Assessment_Report.pdf
+ * Template: [CandidateName]_Alt_India_Sales_Counselling_Assessment_Report.pdf
  */
 export function sanitizeReportFilename(name: string): string {
   const cleanName = name

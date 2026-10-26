@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChapterInfo, UserTrainingRecord } from '../types/index.ts';
 import { CHAPTERS_DATA } from '../data/chaptersData.ts';
-import { ArrowRight, CheckCircle2, AlertCircle, Clock, Award, FileText, ChevronRight } from 'lucide-react';
+import { ArrowRight, CheckCircle2, AlertCircle, Award, FileText, ChevronRight, Headphones } from 'lucide-react';
 
 interface DashboardViewProps {
   user: UserTrainingRecord;
@@ -18,19 +18,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 }) => {
   const finalState = user.finalAssessment;
   const hasCompletedFinal = finalState.status === 'completed' && finalState.latestScore !== null;
-  const reportAvailable = user.report.generated && user.report.data !== null;
 
-  // Compute summary stats
-  const totalChapters = CHAPTERS_DATA.length;
-  const chaptersAttemptedCount = Object.values(user.chapters).filter(
-    (ch) => ch.assessment.attempts.length > 0
+  // Filter theory modules vs roleplay modules
+  const theoryModules = CHAPTERS_DATA.filter((ch) => ch.type === 'theory');
+  const totalTheoryCount = theoryModules.length; // 7
+
+  const chaptersPassedCount = theoryModules.filter(
+    (ch) => user.chapters[String(ch.id)]?.assessment?.passed
   ).length;
 
-  const chaptersPassedCount = Object.values(user.chapters).filter(
-    (ch) => ch.assessment.passed
-  ).length;
-
-  const allChaptersCleared = chaptersPassedCount === totalChapters;
+  const allChaptersCleared = chaptersPassedCount === totalTheoryCount;
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-10">
@@ -45,21 +42,21 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               Welcome, {user.name} 👋
             </h1>
             <p className="text-sm text-slate-600 mt-1">
-              Alt India Sales Counselling Training · 11 Comprehensive Modules & Assessment
+              Alt India Sales Counselling Training · 9 Modules (7 Theory + 2 Kannada Roleplays)
             </p>
           </div>
 
           <div className="flex items-center gap-6 sm:border-l sm:border-slate-100 sm:pl-6">
             <div>
               <div className="text-xl sm:text-2xl font-bold text-slate-900">
-                {chaptersPassedCount}<span className="text-slate-400 font-normal text-sm"> / {totalChapters}</span>
+                {chaptersPassedCount}<span className="text-slate-400 font-normal text-sm"> / {totalTheoryCount}</span>
               </div>
-              <div className="text-xs text-slate-500">Chapters Cleared</div>
+              <div className="text-xs text-slate-500">Theory Cleared</div>
             </div>
             {finalState.bestScore !== null && (
               <div>
                 <div className="text-xl sm:text-2xl font-bold text-slate-900">
-                  {finalState.bestScore}<span className="text-slate-400 font-normal text-sm"> / 100</span>
+                  {finalState.bestScore}<span className="text-slate-400 font-normal text-sm"> / 30</span>
                 </div>
                 <div className="text-xs text-slate-500">Final Score</div>
               </div>
@@ -68,15 +65,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
       </div>
 
-      {/* Chapters Grid (11 Modules) */}
+      {/* Chapters Grid (Exactly 9 Modules) */}
       <div>
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-lg font-bold text-slate-900 tracking-tight">
-              Training Chapters
+              Training Modules
             </h2>
             <p className="text-xs text-slate-500">
-              Complete and clear all 11 chapter assessments (≥ 70%) to qualify for the Final Assessment.
+              Clear all 7 theory module assessments (≥ 70%) to qualify for the Final Assessment. Modules 08 & 09 are demonstration roleplays.
             </p>
           </div>
         </div>
@@ -84,6 +81,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {CHAPTERS_DATA.map((chapter: ChapterInfo) => {
             const chProgress = user.chapters[String(chapter.id)];
+            const isRoleplay = chapter.type === 'roleplay';
             const assessment = chProgress?.assessment;
             const hasAttempted = assessment && assessment.attempts.length > 0;
             const isPassed = assessment?.passed;
@@ -96,13 +94,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               >
                 <div>
                   <div className="flex items-start justify-between gap-3 mb-2">
-                    <span className="text-xs font-mono font-semibold text-slate-400 group-hover:text-slate-900 transition-colors">
-                      {chapter.number}
-                    </span>
-                    <span className="text-[11px] text-slate-400 flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {chapter.duration}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono font-semibold text-slate-400 group-hover:text-slate-900 transition-colors">
+                        {chapter.number}
+                      </span>
+                      {isRoleplay && (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200/60">
+                          <Headphones className="w-2.5 h-2.5" />
+                          <span>Roleplay</span>
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <h3 className="text-base font-semibold text-slate-900 leading-snug group-hover:text-slate-950 transition-colors">
@@ -115,31 +117,35 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 </div>
 
                 <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-                  {/* Assessment Status */}
+                  {/* Status indicator: Roleplay vs Theory Assessment */}
                   <div>
-                    {!hasAttempted ? (
+                    {isRoleplay ? (
+                      <span className="text-slate-500 font-medium">
+                        Demonstration — No Assessment
+                      </span>
+                    ) : !hasAttempted ? (
                       <span className="text-slate-400 font-normal">
                         Assessment: Not Attempted
                       </span>
                     ) : isPassed ? (
                       <span className="text-emerald-700 font-medium flex items-center gap-1">
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                        <span>Assessment: {bestScore}/5 — Passed</span>
+                        <span>Assessment: {bestScore}/{chapter.assessmentQuestionCount} — Passed</span>
                       </span>
                     ) : (
                       <span className="text-amber-700 font-medium flex items-center gap-1">
                         <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
-                        <span>Assessment: {bestScore}/5 — Needs Retake</span>
+                        <span>Assessment: {bestScore}/{chapter.assessmentQuestionCount} — Needs Retake</span>
                       </span>
                     )}
                   </div>
 
-                  {/* Open Chapter Action */}
+                  {/* Open Module Action */}
                   <button
                     onClick={() => onOpenChapter(chapter.id)}
                     className="inline-flex items-center gap-1 font-medium text-slate-900 group-hover:text-blue-600 transition-colors cursor-pointer"
                   >
-                    <span>Open Chapter</span>
+                    <span>{isRoleplay ? 'Watch Roleplay' : 'Open Module'}</span>
                     <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                   </button>
                 </div>
@@ -161,11 +167,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </span>
               <span className="text-slate-300">·</span>
               <span className="text-xs text-slate-500">30 Questions · 40 Minutes</span>
+              <span className="text-slate-300">·</span>
+              <span className="text-xs text-slate-500">Pass Mark: 75%</span>
               {!allChaptersCleared && (
                 <>
                   <span className="text-slate-300">·</span>
                   <span className="text-xs font-semibold text-amber-700">
-                    Prerequisite: {chaptersPassedCount} of {totalChapters} Cleared
+                    Prerequisite: {chaptersPassedCount} of {totalTheoryCount} Cleared
                   </span>
                 </>
               )}
@@ -173,16 +181,19 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <h2 className="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
               <span>FINAL ASSESSMENT</span>
             </h2>
+            <p className="text-xs font-medium text-slate-500">
+              Based on Modules 1–7
+            </p>
             <p className="text-xs sm:text-sm text-slate-600 max-w-xl">
               {allChaptersCleared
-                ? 'All 11 chapter assessments cleared! You are qualified to take the comprehensive final assessment (Passing score: 75/100).'
-                : 'Locked. You must take and clear all 11 individual chapter assessments (≥ 70%) before you can begin the Final Assessment.'}
+                ? 'All 7 theory module assessments cleared! You are qualified to take the comprehensive final assessment (Passing score: 75%, 23/30).'
+                : 'Locked. You must take and clear all 7 theory module assessments (≥ 70%) before you can begin the Final Assessment.'}
             </p>
 
             {hasCompletedFinal && (
               <div className="pt-2 flex items-center gap-3 text-xs">
                 <span className="font-semibold text-slate-900">
-                  Final Score: {finalState.latestScore}/100
+                  Final Score: {finalState.latestScore}/30 ({Math.round(((finalState.latestScore || 0) / 30) * 100)}%)
                 </span>
                 <span className="text-slate-300">·</span>
                 <span className={`font-semibold ${finalState.passed ? 'text-emerald-700' : 'text-amber-700'}`}>
@@ -201,9 +212,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <button
                 disabled
                 className="py-3 px-6 bg-slate-200 text-slate-400 font-medium rounded-xl text-xs sm:text-sm cursor-not-allowed flex items-center justify-center gap-2"
-                title={`Pass all 11 chapters to unlock (${chaptersPassedCount}/${totalChapters} cleared)`}
+                title={`Pass all 7 theory module assessments to unlock (${chaptersPassedCount}/${totalTheoryCount} cleared)`}
               >
-                <span>Locked ({chaptersPassedCount}/{totalChapters} Cleared)</span>
+                <span>Locked ({chaptersPassedCount}/{totalTheoryCount} Cleared)</span>
               </button>
             ) : hasCompletedFinal ? (
               <>

@@ -1,219 +1,210 @@
 import { ChapterInfo } from '../types/index.ts';
 
 /**
- * Chapters Configuration
- * To update video URLs for any chapter, edit the `videoUrl` field below.
- * Supports Google Drive embed URLs (e.g., https://drive.google.com/file/d/.../preview),
- * direct video links, or standard web video streams.
+ * Canonical Curriculum Configuration
+ * Exactly 9 modules: 7 Theory Modules (with assessments) followed by 2 Kannada Roleplays (no assessments).
+ *
+ * To update video URLs for any chapter, edit the `videoUrl` field below with any Google Drive link.
  */
 export const CHAPTERS_DATA: ChapterInfo[] = [
   {
     id: 1,
     number: '01',
-    title: 'Introduction to Education Sales Counselling',
-    subtitle: 'The Role, Mindset, and Ethics of an Education Counsellor',
+    title: 'Introduction to Counselling',
+    subtitle: 'Foundations of Sales Counselling & Career Understanding',
     description:
-      'Learn the foundational role of education counselling: bridging learner ambitions with practical learning pathways, understanding ethical consulting, establishing credibility, and the difference between consultative counselling and transactional sales.',
+      'Introduction to education sales counselling: why sales is rewarding, understanding education counselling vs. ordinary product sales, diagnosing the learner’s situation and aspirations before recommending courses, and mastering cold calling, lead calling, regional-language rapport, and urgency.',
     keyPoints: [
-      'The consultative sales mindset vs. pushy transactional selling',
-      'Building early rapport, empathy, and professional authority',
-      'The counsellor’s ethical responsibility to the student’s career',
-      'Key performance indicators for education counselling'
+      'Education counselling vs. ordinary product sales: diagnose before recommending',
+      'Understanding the learner’s situation, career aspirations, profile, and goals',
+      'Scope: cold calling, lead calling, lead management, WhatsApp follow-up, regional rapport',
+      'Ethical consulting and positioning recommendations to career outcomes'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_CH01/preview',
+    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD01/preview',
     duration: '18 mins',
     assessmentQuestionCount: 5,
     passingPercentage: 70,
-    timeLimitMinutes: 5
+    timeLimitMinutes: 5,
+    type: 'theory',
+    primaryRecording: 'intro couneslloing.mp3',
+    assessmentId: 'assessment-module-1'
   },
   {
     id: 2,
     number: '02',
-    title: 'Understanding Leads & Education Counselling',
-    subtitle: 'Lead Sources, Intent Levels, and Response Timelines',
+    title: 'Introduction to Education Counselling',
+    subtitle: 'Lead Sources, ICP Evaluation & Pipeline Fundamentals',
     description:
-      'Master the lifecycle of student leads. Distinguish inbound organic leads, social ads leads, webinar attendees, and referral leads, categorizing them by buyer intent and response urgency.',
+      'Understanding education leads and evaluating qualification. Explore lead generation sources (data analyst teams, marketing campaigns), fresh leads, organic high-intent leads, churned/re-churned leads, and assessing suitability across age, background, employment status, income, and language.',
     keyPoints: [
-      'Anatomy of an education lead: intent, budget, timeline, and urgency',
-      'Warm vs. cold inbound leads and response speed importance',
-      'Analysing lead capture forms and previous interaction history',
-      'Target personas: fresh graduates, working professionals, career switchers'
+      'What a lead is and key sources: lead/data analyst team and marketing team',
+      'Fresh leads vs. organic high-intent leads vs. churned/re-churned leads',
+      'Evaluating the Ideal Customer Profile (ICP): age, education, work status, income, language',
+      'Assessing lead quality and tailoring outreach accordingly'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_CH02/preview',
+    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD02/preview',
     duration: '22 mins',
     assessmentQuestionCount: 5,
     passingPercentage: 70,
-    timeLimitMinutes: 5
+    timeLimitMinutes: 5,
+    type: 'theory',
+    primaryRecording: 'Intro Education Counesllor.mp3',
+    assessmentId: 'assessment-module-2'
   },
   {
     id: 3,
     number: '03',
-    title: 'Channels for Connectivity',
-    subtitle: 'Omnichannel Reach: Phone, WhatsApp, Email & SMS',
+    title: 'Channels of Connectivity',
+    subtitle: 'Omnichannel Reach: Call, WhatsApp & Email Protocols',
     description:
-      'Optimize multi-channel outreach to maximize connection rates. Understand call timing strategies, compliant messaging protocols, and when to switch from voice to text channels.',
+      'Master professional outreach hygiene across Phone, WhatsApp, and Email. Learn Truecaller hygiene, professional WhatsApp Business setup, company/university email identity, avoiding context-free greetings, and introducing yourself with clear reasons for contact.',
     keyPoints: [
-      'Best practices for primary voice calling and call windows',
-      'WhatsApp outreach protocol: concise, conversational, and value-first',
-      'Email follow-up structure: subject lines, curriculum highlights, and CTAs',
-      'Cross-channel persistence without spamming'
+      'Core channels: Phone Call, WhatsApp, and Professional Email',
+      'Caller identity hygiene: Truecaller name, company/university identity, professional photo',
+      'WhatsApp Business: separating work and personal, professional profile status and photo',
+      'First outreach protocol: clear introduction, context/reason for contact, polite callback request'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_CH03/preview',
+    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD03/preview',
     duration: '20 mins',
-    assessmentQuestionCount: 5,
+    assessmentQuestionCount: 6,
     passingPercentage: 70,
-    timeLimitMinutes: 5
+    timeLimitMinutes: 6,
+    type: 'theory',
+    primaryRecording: 'Channel.mp3',
+    supportingRecording: 'Sakshi Channelshp3.mp3',
+    assessmentId: 'assessment-module-3'
   },
   {
     id: 4,
     number: '04',
-    title: 'Discovery & Learner Profiling',
-    subtitle: 'Uncovering Career Goals, Skill Gaps, and Financial Readliness',
+    title: 'Content',
+    subtitle: 'The 60/40 Call Balance, Profiling & Product Alignment',
     description:
-      'Conduct powerful discovery sessions. Ask high-yield diagnostic questions to uncover the learner’s true pain points, motivations, current limitations, and decision criteria.',
+      'Structuring the counselling conversation. Maintain the 60% learner / 40% counsellor balance, check availability, profile city, language, and background, repeat the profile back to confirm understanding, connect product features to aspirations, and agree on next reconnection steps.',
     keyPoints: [
-      'The 4 Pillars of Profiling: Background, Career Aspiration, Obstacles, Readiness',
-      'Open-ended probing techniques that get learners opening up',
-      'Identifying decision-makers (self-sponsored vs. parent/sponsor funded)',
-      'Documenting discovery notes accurately in the CRM'
+      'Conversation balance: learner drives ~60%, counsellor drives ~40%',
+      'Opening hygiene: check if it is a good time to talk, ask for 5 minutes',
+      'Comprehensive profiling: city, language, working/studying, income band, age',
+      'Active rapport: repeat profile back, connect product to aspirations, transition to WhatsApp/email'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_CH04/preview',
+    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD04/preview',
     duration: '26 mins',
-    assessmentQuestionCount: 5,
+    assessmentQuestionCount: 7,
     passingPercentage: 70,
-    timeLimitMinutes: 5
+    timeLimitMinutes: 7,
+    type: 'theory',
+    primaryRecording: 'contetn chapter4.mp3',
+    assessmentId: 'assessment-module-4'
   },
   {
     id: 5,
     number: '05',
-    title: 'Counselling Content & First Conversation',
-    subtitle: 'Structuring the Winning First Pitch & Program Walkthrough',
+    title: 'Objection Handling',
+    subtitle: 'Resolving Price, Competition, Time & Family Doubts',
     description:
-      'Craft a compelling first counselling call. Transition smoothly from discovery to presenting course curriculum, mentor pedigree, placement assistance, and ROI.',
+      'Handling student objections with calmness, patience, and confidence. Address fee resistance by connecting career ROI, structure ethical competitor USP comparisons, uncover root hesitation behind "need time to think", and involve family decision-makers via Google Meet/Zoom.',
     keyPoints: [
-      'Structuring the 20-minute first conversation',
-      'Feature-Benefit-Outcome mapping tailored to discovery insights',
-      'Highlighting alumni placement outcomes, projects, and certifications',
-      'Setting clear mutual next steps before hanging up'
+      'Core mindset: stay calm, patient, composed, confident, and know the product',
+      'Fees objection: diagnose affordability, highlight brand, specialization, placements, and networking',
+      'Competitor objection: structured USP comparison without unsupported disparagement',
+      'Hesitation & family: uncover true blocker, offer Google Meet/Zoom with family decision-makers'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_CH05/preview',
-    duration: '24 mins',
-    assessmentQuestionCount: 5,
+    videoUrl: 'https://drive.google.com/file/d/1RSjfEVPjYmtb7NPMKRHC7txL5VCG9vFu/view?usp=drive_link',
+    duration: '28 mins',
+    assessmentQuestionCount: 7,
     passingPercentage: 70,
-    timeLimitMinutes: 5
+    timeLimitMinutes: 7,
+    type: 'theory',
+    primaryRecording: 'objection_chapter 5.mp4',
+    assessmentId: 'assessment-module-5'
   },
   {
     id: 6,
     number: '06',
-    title: 'Objection Handling',
-    subtitle: 'Resolving Price, Time, Competitor, and Trust Concerns',
+    title: 'Follow-Up',
+    subtitle: 'Connected Leads Cadence, RNR Discipline & Smart Tools',
     description:
-      'Turn hesitation into clarity. Learn proven frameworks (Empathize, Clarify, Isolate, Reframe) to address common student objections regarding course fees, time commitments, and self-doubt.',
+      'Systematic follow-up systems for connected and RNR prospects. Shift connected leads to WhatsApp Business, manage Ringing-No-Response (3 calls/day across morning, afternoon, evening for 3 days followed by WhatsApp), avoid back-to-back spamming, and leverage AI tools for professional drafting.',
     keyPoints: [
-      'The "Fees are too high" objection: EMI restructuring & ROI reframing',
-      'The "I don’t have enough time" objection: flexible schedules & time audits',
-      'The "Let me think about it" objection: isolating hidden doubts',
-      'Handling competitor comparisons professionally without badmouthing'
+      'Connected leads: 5–15 min two-way call, transition to WhatsApp Business, set specific reconnect times',
+      'RNR protocol: 3 calls/day (morning, afternoon, evening) across Day 1, 2, and 3 + WhatsApp',
+      'Calling hygiene: never call back-to-back, avoid friend-like abbreviations or overly casual language',
+      'Using AI (ChatGPT/Gemini) to refine polished English and regional follow-up text'
     ],
-    videoUrl: 'https://drive.google.com/file/d/1RSjfEVPjYmtb7NPMKRHC7txL5VCG9vFu/view?usp=drive_link',
-    duration: '28 mins',
-    assessmentQuestionCount: 5,
+    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD06/preview',
+    duration: '24 mins',
+    assessmentQuestionCount: 7,
     passingPercentage: 70,
-    timeLimitMinutes: 5
+    timeLimitMinutes: 7,
+    type: 'theory',
+    primaryRecording: 'followupfinalch.mp3',
+    supportingRecording: 'follow_up_chaprer7.mp3',
+    assessmentId: 'assessment-module-6'
   },
   {
     id: 7,
     number: '07',
-    title: 'Follow-Up — Connected Leads',
-    subtitle: 'Nurturing Warm Prospects to Decision Deadlines',
+    title: 'Closure',
+    subtitle: 'Aspiration Reconnection, Actionable Steps & Ethical Urgency',
     description:
-      'Develop structured follow-up cadences for candidates who answered your call. Keep value high through micro-content, guest masterclasses, and targeted alumni case studies.',
+      'Executing closure: reconnect the student to their stated career aspiration (CTC jump, leadership, career switch), discuss rapid industry change and AI upskilling necessity, create urgency based on genuine product/admission deadlines, and guide them to simple actionable steps like registration fee or seat blocking.',
     keyPoints: [
-      'The 24-48-72 hour follow-up cadence for connected leads',
-      'Value-add touchpoints vs. dry "Just checking in" calls',
-      'Sharing relevant success stories matching the learner’s exact background',
-      'Recognizing buying signals during follow-up calls'
+      'Closure is not a new sales pitch: remind the learner of their own stated career aspirations',
+      'Discuss changing industry and AI: consequences of remaining stagnant vs. upskilling',
+      'Guide toward the simplest actionable step: registration fee or seat blocking',
+      'Authentic urgency: tie deadlines to actual admission cohorts, batch start dates, and seat caps'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_CH07/preview',
-    duration: '21 mins',
-    assessmentQuestionCount: 5,
+    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD07/preview',
+    duration: '25 mins',
+    assessmentQuestionCount: 7,
     passingPercentage: 70,
-    timeLimitMinutes: 5
+    timeLimitMinutes: 7,
+    type: 'theory',
+    primaryRecording: 'closuresfinalchp7.mp3',
+    assessmentId: 'assessment-module-7'
   },
   {
     id: 8,
     number: '08',
-    title: 'Follow-Up — RNR, WhatsApp, Email & AI',
-    subtitle: 'Re-engaging Ringing-No-Response Leads with Smart Tools',
+    title: 'Roleplay Kannada - Discovery',
+    subtitle: 'Kannada Roleplay Demonstration · No Assessment',
     description:
-      'Systematic strategies for Ringing-No-Response (RNR) leads. Leverage AI drafting tools, WhatsApp automation, time-zone mapping, and re-engagement campaigns.',
+      'Practical demonstration of a complete discovery call conducted in Kannada. Observe natural call opening, establishing call purpose, university awareness, educational qualification profiling (CGPA, degree, work experience), and uncovering learner motivations for Masters education.',
     keyPoints: [
-      'RNR calling schedule: optimal time slot diversification',
-      'WhatsApp hook messages that get 3x higher reply rates',
-      'Using AI tools to quickly personalize follow-up emails and summaries',
-      'When to archive a non-responsive lead to preserve pipeline health'
+      'Opening introduction and establishing clear reason for call',
+      'Probing highest education, CGPA, work domain, and years of experience',
+      'Understanding interest in Masters and current compensation benchmarks',
+      'Kannada roleplay observation session — no assessment required'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_CH08/preview',
-    duration: '23 mins',
-    assessmentQuestionCount: 5,
-    passingPercentage: 70,
-    timeLimitMinutes: 5
+    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD08/preview',
+    duration: '18 mins',
+    assessmentQuestionCount: 0,
+    passingPercentage: 0,
+    timeLimitMinutes: 0,
+    type: 'roleplay',
+    primaryRecording: 'ddiscoverychp1kananada.mp3',
+    assessmentId: null
   },
   {
     id: 9,
     number: '09',
-    title: 'Closing the Sale & Creating Urgency',
-    subtitle: 'Batch Deadlines, Scholarship Quotas, and Commitment Steps',
+    title: 'Roleplay Kannada - Closure',
+    subtitle: 'Kannada Roleplay Demonstration · No Assessment',
     description:
-      'Master the transition from counselling to financial commitment. Learn ethical urgency drivers, scholarship expiry, seat caps, and secure downpayment collection.',
+      'Practical demonstration of a closure call conducted in Kannada. Observe managing hesitation when a learner says they need time or are switching jobs, addressing salary aspirations, offering parent involvement via Google Meet, creating timeline urgency, and securing registration seat blocking.',
     keyPoints: [
-      'Creating authentic urgency (batch start dates, seat allocations)',
-      'The trial close vs. definitive commitment close',
-      'Spot scholarship discounts and time-bound tuition waivers',
-      'Guiding candidates through instant online registration and seat booking'
-    ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_CH09/preview',
-    duration: '25 mins',
-    assessmentQuestionCount: 5,
-    passingPercentage: 70,
-    timeLimitMinutes: 5
-  },
-  {
-    id: 10,
-    number: '10',
-    title: 'Closure Roleplay',
-    subtitle: 'Simulated Calls, Critical Scenarios & Real-Time Corrections',
-    description:
-      'Listen to and analyze real counselling calls. Deconstruct successful closures and identify critical inflection points where counsellor responses made or broke the enrollment.',
-    keyPoints: [
-      'Full audio roleplay analysis: opening, discovery, pitch, and close',
-      'Identifying verbal hesitations and subtle tone shifts in learners',
-      'Spotting self-sabotaging counsellor mistakes (talking over the student)',
-      'Actionable roleplay scorecard and peer feedback framework'
+      'Handling learner hesitation around work commitments and job switches',
+      'Connecting Masters education directly to salary growth and career trajectory',
+      'Involving family through Google Meet and securing concrete callback commitments',
+      'Kannada roleplay observation session — no assessment required'
     ],
     videoUrl: 'https://drive.google.com/file/d/1HfxiEsc113pu2N6mu_Py2zEfbB2a5N2s/view?usp=drive_link',
     duration: '30 mins',
-    assessmentQuestionCount: 5,
-    passingPercentage: 70,
-    timeLimitMinutes: 5
-  },
-  {
-    id: 11,
-    number: '11',
-    title: 'Final Counselling & Closure Mindset',
-    subtitle: 'Resilience, Daily Discipline, Target Achievement & Career Growth',
-    description:
-      'Sustain high performance as an education counsellor. Build emotional resilience against rejections, organize daily calling sprints, and cultivate a genuine career mentor mindset.',
-    keyPoints: [
-      'Mental resilience and reframing "no" in education sales',
-      'Daily time-blocking: calling sprints, follow-ups, and CRM hygiene',
-      'Pipeline mathematics: conversion ratios and achieving monthly targets',
-      'The long-term career trajectory of elite education sales leaders'
-    ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_CH11/preview',
-    duration: '20 mins',
-    assessmentQuestionCount: 5,
-    passingPercentage: 70,
-    timeLimitMinutes: 5
+    assessmentQuestionCount: 0,
+    passingPercentage: 0,
+    timeLimitMinutes: 0,
+    type: 'roleplay',
+    primaryRecording: 'cloasurefinalchp3.mp3',
+    assessmentId: null
   }
 ];

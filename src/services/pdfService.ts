@@ -96,70 +96,32 @@ export function generateAssessmentReportPDF(report: FinalReportData): void {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8);
   doc.setTextColor(100, 116, 139);
-  doc.text(`Passing: 75/100 · ${report.finalAttempts} attempt(s)`, margin + 125, currentY + 24);
+  doc.text(`Passing: 75% (${Math.ceil(report.maximumScore * 0.75)}/${report.maximumScore}) · ${report.finalAttempts} attempt(s)`, margin + 125, currentY + 24);
 
-  // Section Breakdown box
+  // Curriculum Scope Overview Box
   currentY = 88;
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(11);
-  doc.setTextColor(15, 23, 42);
-  doc.text('Comprehensive Final Assessment Section Breakdown', margin, currentY);
-
-  currentY += 4;
-  const colWidth = (contentWidth - 6) / 3;
-
-  // Section 1: Core Knowledge
   doc.setFillColor(255, 255, 255);
-  doc.roundedRect(margin, currentY, colWidth, 22, 2, 2, 'FD');
+  doc.roundedRect(margin, currentY, contentWidth, 20, 2, 2, 'FD');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  doc.setTextColor(15, 23, 42);
+  doc.text('Curriculum Architecture & Scope', margin + 5, currentY + 6);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8);
   doc.setTextColor(100, 116, 139);
-  doc.text('Part A · Core Knowledge', margin + 4, currentY + 6);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(13);
-  doc.setTextColor(15, 23, 42);
-  doc.text(`${report.sectionScores.coreKnowledge.score} / ${report.sectionScores.coreKnowledge.max}`, margin + 4, currentY + 14);
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(7.5);
-  doc.setTextColor(100, 116, 139);
-  doc.text('20 Questions (2 marks each)', margin + 4, currentY + 19);
+  doc.text(
+    '7 Theory Modules (Assessments 1–7) + 2 Kannada Roleplay Demonstrations (No Assessment). Final Assessment draws exclusively from Modules 1–7.',
+    margin + 5,
+    currentY + 13,
+    { maxWidth: contentWidth - 10 }
+  );
 
-  // Section 2: Scenario-Based
-  doc.roundedRect(margin + colWidth + 3, currentY, colWidth, 22, 2, 2, 'FD');
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8);
-  doc.setTextColor(100, 116, 139);
-  doc.text('Part B · Scenario-Based', margin + colWidth + 7, currentY + 6);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(13);
-  doc.setTextColor(15, 23, 42);
-  doc.text(`${report.sectionScores.scenarioBased.score} / ${report.sectionScores.scenarioBased.max}`, margin + colWidth + 7, currentY + 14);
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(7.5);
-  doc.setTextColor(100, 116, 139);
-  doc.text('5 Scenarios (6 marks each)', margin + colWidth + 7, currentY + 19);
-
-  // Section 3: Practical Tasks
-  doc.roundedRect(margin + (colWidth + 3) * 2, currentY, colWidth, 22, 2, 2, 'FD');
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8);
-  doc.setTextColor(100, 116, 139);
-  doc.text('Part C · Practical Tasks', margin + (colWidth + 3) * 2 + 4, currentY + 6);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(13);
-  doc.setTextColor(15, 23, 42);
-  doc.text(`${report.sectionScores.practical.score} / ${report.sectionScores.practical.max}`, margin + (colWidth + 3) * 2 + 4, currentY + 14);
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(7.5);
-  doc.setTextColor(100, 116, 139);
-  doc.text('5 Tasks (6 marks each)', margin + (colWidth + 3) * 2 + 4, currentY + 19);
-
-  // Chapter Assessments Summary Table
-  currentY += 30;
+  // Module Assessments Summary Table
+  currentY += 28;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
   doc.setTextColor(15, 23, 42);
-  doc.text('Individual Chapter Assessment Matrix (11 Chapters)', margin, currentY);
+  doc.text('Module Matrix (7 Theory Modules + 2 Demonstrations)', margin, currentY);
 
   currentY += 4;
   // Table header
@@ -168,10 +130,10 @@ export function generateAssessmentReportPDF(report: FinalReportData): void {
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(7.5);
   doc.setTextColor(71, 85, 105); // slate-600
-  doc.text('CH', margin + 3, currentY + 4.8);
-  doc.text('CHAPTER TITLE', margin + 14, currentY + 4.8);
-  doc.text('SCORE', margin + 115, currentY + 4.8);
-  doc.text('STATUS', margin + 138, currentY + 4.8);
+  doc.text('MOD', margin + 3, currentY + 4.8);
+  doc.text('MODULE TITLE', margin + 16, currentY + 4.8);
+  doc.text('SCORE', margin + 112, currentY + 4.8);
+  doc.text('STATUS', margin + 134, currentY + 4.8);
   doc.text('ATTEMPTS', margin + 160, currentY + 4.8);
 
   currentY += 7;
@@ -197,33 +159,45 @@ export function generateAssessmentReportPDF(report: FinalReportData): void {
     doc.setFontSize(8);
     doc.setTextColor(15, 23, 42);
     // Truncate title if needed
-    const truncatedTitle = ch.title.length > 55 ? ch.title.slice(0, 52) + '...' : ch.title;
-    doc.text(truncatedTitle, margin + 14, rowY + 5.5);
+    const truncatedTitle = ch.title.length > 50 ? ch.title.slice(0, 47) + '...' : ch.title;
+    doc.text(truncatedTitle, margin + 16, rowY + 5.5);
 
-    // Score
-    if (ch.bestScore !== null) {
-      doc.text(`${ch.bestScore} / ${ch.totalQuestions}`, margin + 115, rowY + 5.5);
-    } else {
+    const isRoleplay = ch.type === 'roleplay' || ch.chapterId === 8 || ch.chapterId === 9;
+
+    if (isRoleplay) {
+      // Roleplay — No Assessment
       doc.setTextColor(148, 163, 184);
-      doc.text('—', margin + 115, rowY + 5.5);
-      doc.setTextColor(15, 23, 42);
-    }
-
-    // Status
-    if (ch.passed) {
-      doc.setTextColor(22, 101, 52);
-      doc.text('Passed', margin + 138, rowY + 5.5);
-    } else if (ch.bestScore !== null) {
-      doc.setTextColor(185, 28, 28);
-      doc.text('Retake', margin + 138, rowY + 5.5);
+      doc.text('—', margin + 112, rowY + 5.5);
+      doc.setFont('helvetica', 'italic');
+      doc.text('Roleplay — No Assessment', margin + 134, rowY + 5.5);
+      doc.setFont('helvetica', 'normal');
+      doc.text('—', margin + 165, rowY + 5.5);
     } else {
-      doc.setTextColor(148, 163, 184);
-      doc.text('Unattempted', margin + 138, rowY + 5.5);
-    }
+      // Theory Module Assessment
+      if (ch.bestScore !== null) {
+        doc.text(`${ch.bestScore} / ${ch.totalQuestions}`, margin + 112, rowY + 5.5);
+      } else {
+        doc.setTextColor(148, 163, 184);
+        doc.text('—', margin + 112, rowY + 5.5);
+        doc.setTextColor(15, 23, 42);
+      }
 
-    // Attempts
-    doc.setTextColor(100, 116, 139);
-    doc.text(`${ch.attempts}`, margin + 165, rowY + 5.5);
+      // Status
+      if (ch.passed) {
+        doc.setTextColor(22, 101, 52);
+        doc.text('Passed (≥ 70%)', margin + 134, rowY + 5.5);
+      } else if (ch.bestScore !== null) {
+        doc.setTextColor(185, 28, 28);
+        doc.text('Needs Retake', margin + 134, rowY + 5.5);
+      } else {
+        doc.setTextColor(148, 163, 184);
+        doc.text('Unattempted', margin + 134, rowY + 5.5);
+      }
+
+      // Attempts
+      doc.setTextColor(100, 116, 139);
+      doc.text(`${ch.attempts}`, margin + 165, rowY + 5.5);
+    }
   });
 
   // Footer notes & verification

@@ -1,0 +1,1753 @@
+# COMPLETE CURRICULUM + ASSESSMENT RESTRUCTURE
+
+You are modifying an EXISTING working education sales counselling training application.
+
+IMPORTANT:
+The application is already substantially built and working.
+
+DO NOT rebuild the application from scratch.
+DO NOT redesign unrelated parts.
+DO NOT remove working functionality.
+DO NOT change the existing persistence architecture unless absolutely necessary.
+
+Your task is to restructure the existing software so that its curriculum, module ordering, assessment system, and Final Assessment exactly match the curriculum defined below.
+
+The source of truth is the training recordings/transcripts supplied for this project.
+
+==================================================
+1. NON-NEGOTIABLE CURRICULUM STRUCTURE
+==================================================
+
+There are exactly 9 training modules.
+
+There are exactly 7 THEORY modules followed by 2 KANNADA ROLEPLAY modules.
+
+The exact sequence is:
+
+MODULE 1
+Introduction to Counselling
+
+MODULE 2
+Introduction to Education Counselling
+
+MODULE 3
+Channels of Connectivity
+
+MODULE 4
+Content
+
+MODULE 5
+Objection Handling
+
+MODULE 6
+Follow-Up
+
+MODULE 7
+Closure
+
+MODULE 8
+Discovery Roleplay — Kannada
+
+MODULE 9
+Closure Roleplay — Kannada
+
+DO NOT create an 10th or 11th module.
+
+DO NOT split supporting/sample recordings into separate modules.
+
+==================================================
+2. RECORDING MAPPING
+==================================================
+
+Use the following mapping.
+
+MODULE 1
+Title:
+Introduction to Counselling
+
+Primary recording:
+intro couneslloing.mp3
+
+Purpose:
+Main introduction to education sales counselling.
+
+Key source concepts:
+- Why sales can be rewarding.
+- Education counselling versus ordinary product sales.
+- Education counselling means understanding the learner's current situation, career aspirations, profile, goals, education and desired field/interests before recommending a course.
+- The training covers cold calling, lead calling, lead management, WhatsApp follow-up, regional-language rapport, closing with urgency and education product sales.
+
+--------------------------------------------------
+
+MODULE 2
+Title:
+Introduction to Education Counselling
+
+Primary recording:
+Intro Education Counesllor.mp3
+
+Purpose:
+Understanding leads and how an education counsellor evaluates them.
+
+Key source concepts:
+- What a lead is.
+- Lead sources.
+- Lead/data analyst team.
+- Marketing team.
+- Fresh leads.
+- Organic/high-intent leads.
+- Old/churned/re-churned leads.
+- Understanding age.
+- Educational/background profile.
+- Working/studying/fresher status.
+- Income/affordability.
+- Language and rapport.
+- Evaluating whether a lead fits the ideal customer profile.
+
+--------------------------------------------------
+
+MODULE 3
+Title:
+Channels of Connectivity
+
+Primary/supporting recordings:
+Channel.mp3
+Sakshi Channelshp3.mp3
+
+IMPORTANT:
+These are ONE MODULE.
+
+Do NOT create two modules.
+
+Key source concepts:
+- Call.
+- WhatsApp.
+- Email.
+- Professional caller identity.
+- Truecaller hygiene.
+- Name + university/company where appropriate.
+- Professional profile picture.
+- WhatsApp Business.
+- Separate professional and personal communication.
+- Professional WhatsApp name/status/photo.
+- Company/university email where available.
+- Appropriate email identity.
+- Do not use random "Hi" or "Good morning" messages without context.
+- Introduce yourself.
+- Explain the reason for contacting the learner.
+- Ask for a callback/availability.
+- Maintain professional tonality.
+
+--------------------------------------------------
+
+MODULE 4
+Title:
+Content
+
+Primary recording:
+contetn chapter4.mp3
+
+Key source concepts:
+
+PHONE CALL:
+
+- The learner should ideally drive approximately 60% of the conversation.
+- The counsellor should drive approximately 40%.
+- Start with a short introduction.
+- Cold-call attention span is low.
+- Check whether it is a good time to talk.
+- Ask for approximately 5 minutes where appropriate.
+
+PROFILING:
+
+- Understand who the learner is.
+- City.
+- Language.
+- Working/studying/fresher.
+- Income band where appropriate.
+- Age bracket.
+- Product-specific eligibility/profile factors.
+- Regional-language ability can be used to build rapport.
+- Switch to a language the learner is comfortable with when appropriate.
+
+RAPPORT:
+
+- Do not immediately launch into a product pitch.
+- Ask relevant profiling questions.
+- Let the learner engage.
+- Repeat/summarize the learner's profile back to them.
+- Demonstrate that you understood their current situation and aspirations.
+
+PRODUCT COUNSELLING:
+
+- After profiling, explain the product.
+- Do not simply "sell."
+- Connect the product to the learner's aspirations.
+
+CLOSURE:
+
+- Create appropriate urgency.
+- Example concepts include limited seats/deadline and agreeing on a specific callback.
+- Confirm WhatsApp number/email.
+- Move the conversation to WhatsApp or email.
+
+CONNECTED LEAD FOLLOW-UP:
+
+- WhatsApp is preferred in the source over email for quick communication.
+- Refer back to the conversation.
+- Thank the learner.
+- Send relevant material.
+- Ask for the next suitable time to reconnect.
+- Push appropriately toward closure.
+
+NOT-CONNECTED LEAD:
+
+- Use WhatsApp/email professionally.
+- Keep the message short.
+- Introduce yourself.
+- Mention the relevant product/topic.
+- Share basic material where appropriate.
+- Ask for availability.
+- WhatsApp is preferred over email in the source.
+
+--------------------------------------------------
+
+MODULE 5
+Title:
+Objection Handling
+
+Primary recording:
+objection_chapter 5.mp4
+
+Key source concepts:
+
+General:
+- Stay calm.
+- Be patient.
+- Stay composed.
+- Stay confident.
+- Know the product properly.
+
+OBJECTION 1:
+"Fees are too high."
+
+Expected counselling approach:
+- Understand affordability/financial background.
+- Understand what matters to the learner.
+- Connect value to factors such as:
+  - brand
+  - specialization
+  - placements
+  - career opportunity
+  - networking
+  - alumni
+
+OBJECTION 2:
+"Market comparison."
+
+Expected approach:
+- Know competitors.
+- Prepare a structured USP comparison.
+- Compare relevant factors such as:
+  - fees
+  - faculty
+  - specializations
+  - placements
+  - career opportunities
+  - alumni
+  - overall value
+
+OBJECTION 3:
+"I need time to think."
+
+Expected approach:
+- Do not blindly accept the statement.
+- Understand the real blocker.
+- Build rapport.
+- Find the actual reason behind the hesitation.
+
+OBJECTION 4:
+"I need to ask my family."
+
+Expected approach:
+- Involve the actual decision-maker where appropriate.
+- Offer Google Meet/Zoom/conference-call style involvement.
+- Help the family understand the opportunity and product.
+
+General closing principle:
+- Education should be positioned as a career investment.
+- End objections positively.
+- Appropriate motivation/urgency/FOMO can be used without becoming negative or aggressive.
+
+--------------------------------------------------
+
+MODULE 6
+Title:
+Follow-Up
+
+PRIMARY recording:
+followupfinalch.mp3
+
+IMPORTANT:
+This is the MAIN Follow-Up module.
+
+The recording:
+follow_up_chaprer7.mp3
+
+is SUPPORTING/SAMPLE FOLLOW-UP MATERIAL.
+
+DO NOT create a separate module for it.
+
+Key source concepts:
+
+CONNECTED LEADS:
+- First counselling can be approximately 5–15 minutes.
+- Make the conversation two-way.
+- Move follow-up to WhatsApp Business.
+- Avoid relying only on ordinary phone calls.
+- Use WhatsApp calls/messages.
+- Maintain professional language.
+- AI tools such as ChatGPT/Gemini may be used to refine English/regional-language text.
+- Do not use overly casual/friend-like abbreviations.
+- Email can be used for triggers such as:
+  - scholarships
+  - deadlines
+  - launches
+  - admissions/courses
+
+RNR:
+RNR means:
+Ringing, No Response.
+
+Source process:
+- Call 3 times per day:
+  - morning
+  - afternoon
+  - evening
+- Continue this approach across Day 1, Day 2 and Day 3.
+- Send WhatsApp after RNR attempts.
+- Do not call back-to-back.
+- Continue follow-up over the month as appropriate.
+
+The supporting follow-up recording additionally emphasizes:
+- Stretching the initial counselling conversation appropriately.
+- Moving follow-up to WhatsApp Business.
+- Asking for a specific reconnect time.
+- If the learner does not respond, do not intrude repeatedly in the same moment.
+- Try again the next day.
+- Continue appropriate follow-up throughout the month.
+
+--------------------------------------------------
+
+MODULE 7
+Title:
+Closure
+
+PRIMARY THEORY recording:
+closuresfinalchp7.mp3
+
+IMPORTANT:
+This is the THEORY module for Closure.
+
+Key source concepts:
+
+- Closure is the final stage of the sales cycle.
+- The source says closure is not about starting another sales pitch.
+- Remind the learner of the aspiration they shared during profiling.
+- Examples:
+  - increasing CTC
+  - leadership position
+  - switching career
+  - other learner-specific aspirations
+- Encourage the learner not to postpone the action.
+- Encourage taking an appropriate action today.
+- Reassure the learner that the counsellor is there to support them.
+- Explain that the industry is changing rapidly.
+- AI and changing roles make upskilling/career development relevant.
+- Explain consequences of missed opportunities.
+- Encourage the easiest/shortest actionable step.
+- Examples include:
+  - registration fee
+  - blocking a seat
+- Appropriate urgency may involve:
+  - seats filling up
+  - limited seats
+  - approaching admission deadline
+- Urgency must match the actual product/admission timeline.
+- Do not invent arbitrary urgency.
+
+--------------------------------------------------
+
+MODULE 8
+Title:
+Discovery Roleplay — Kannada
+
+Recording:
+ddiscoverychp1kananada.mp3
+
+THIS IS A ROLEPLAY ONLY.
+
+ABSOLUTE RULES:
+
+NO MODULE ASSESSMENT.
+
+NO QUESTIONS.
+
+NO QUIZ.
+
+NO SCORE.
+
+NO PASS/FAIL.
+
+NO ATTEMPT RECORD.
+
+DO NOT INCLUDE THIS MODULE IN THE FINAL ASSESSMENT.
+
+The purpose is demonstration/practical observation of Discovery.
+
+The roleplay demonstrates:
+- Introducing oneself.
+- Establishing reason for call.
+- University awareness.
+- Asking highest education.
+- Understanding Masters eligibility.
+- Understanding CGPA.
+- Understanding current work/domain.
+- Understanding interest in Masters.
+- Understanding years of experience.
+- Understanding current/highest salary.
+- Using discovery information to prepare the later counselling/pitch.
+
+The UI may show:
+"Roleplay / Demonstration"
+
+It must NOT show:
+"Take Assessment"
+
+--------------------------------------------------
+
+MODULE 9
+Title:
+Closure Roleplay — Kannada
+
+Recording:
+cloasurefinalchp3.mp3
+
+THIS IS A ROLEPLAY ONLY.
+
+ABSOLUTE RULES:
+
+NO MODULE ASSESSMENT.
+
+NO QUESTIONS.
+
+NO QUIZ.
+
+NO SCORE.
+
+NO PASS/FAIL.
+
+NO ATTEMPT RECORD.
+
+DO NOT INCLUDE THIS MODULE IN THE FINAL ASSESSMENT.
+
+The roleplay demonstrates:
+- Learner says they need time.
+- Learner is busy with work.
+- Learner is considering switching companies.
+- Counsellor connects Masters education to career growth.
+- Counsellor addresses salary-growth aspirations.
+- Counsellor handles hesitation.
+- Counsellor creates appropriate urgency.
+- Counsellor addresses family involvement.
+- Counsellor offers to speak with parents through Google Meet.
+- Counsellor discusses registration/seat blocking.
+- Counsellor asks for a specific commitment time.
+- Counsellor follows up on the agreed time.
+- Counsellor uses an appropriate deadline/seat availability context.
+- Counsellor attempts to convert the learner's interest into an actionable next step.
+
+The UI should clearly identify this as:
+
+"Kannada Closure Roleplay"
+
+and:
+
+"Demonstration — No Assessment"
+
+==================================================
+3. REMOVE OLD 11-MODULE STRUCTURE
+==================================================
+
+Search the existing application for any old chapter/module definitions.
+
+Remove or replace old structures such as:
+
+- Chapter 8 Follow-Up RNR
+- Chapter 9 Closing & Urgency
+- Chapter 10 Closure Roleplay
+- Chapter 11 Final Counselling & Closure Mindset
+- Any old 10/11-module arrays.
+- Any old assessment mappings that assume 11 chapters.
+
+Do not leave duplicate obsolete module definitions in the code.
+
+There must be ONE canonical curriculum configuration.
+
+==================================================
+4. SUPPORTING RECORDINGS
+==================================================
+
+Supporting recordings must not accidentally become chapters.
+
+Specifically:
+
+Channel.mp3
+Sakshi Channelshp3.mp3
+
+= same Module 3.
+
+followupfinalch.mp3
+follow_up_chaprer7.mp3
+
+= same Module 6.
+
+The application can optionally expose multiple recordings inside the relevant module as:
+- Main Recording
+- Supporting Recording
+
+But this is optional.
+
+The important requirement is:
+
+THEY MUST NOT CREATE ADDITIONAL MODULES OR ADDITIONAL ASSESSMENTS.
+
+For assessment generation, the module's complete relevant theory can be used, but questions must not duplicate merely because there are multiple recordings.
+
+==================================================
+5. MODULE ASSESSMENTS
+==================================================
+
+Create a separate assessment after each THEORY module only.
+
+Therefore there are exactly 7 module assessments.
+
+There are ZERO assessments for Modules 8 and 9.
+
+Use the following question counts:
+
+Module 1:
+5 questions
+
+Module 2:
+5 questions
+
+Module 3:
+6 questions
+
+Module 4:
+7 questions
+
+Module 5:
+7 questions
+
+Module 6:
+7 questions
+
+Module 7:
+7 questions
+
+Total module-assessment questions:
+44 questions.
+
+Each assessment should have:
+- Multiple-choice questions.
+- 4 options.
+- Exactly 1 correct answer.
+- Immediate or end-of-assessment scoring according to the existing application's current assessment UX.
+- Pass mark: 70%.
+- Unlimited retakes.
+- Persist attempt/result data.
+
+Do not create trick questions.
+
+Questions must test understanding/application of the training material.
+
+==================================================
+6. MODULE 1 ASSESSMENT
+==================================================
+
+TITLE:
+Assessment — Introduction to Counselling
+
+5 questions.
+
+Q1:
+What is the key difference between ordinary product sales and education counselling?
+
+Correct answer:
+Education counselling first understands the learner's current situation, aspirations, profile, goals, education and interests before recommending a suitable course.
+
+Q2:
+Which approach best represents education counselling?
+
+Correct:
+Understand the learner first and then connect the relevant educational product to their goals.
+
+Q3:
+Which of the following is part of the training's education sales counselling scope?
+
+Correct:
+Cold calling, lead calling, lead management, WhatsApp follow-up, regional-language rapport and closing.
+
+Q4:
+Why should a counsellor understand the learner's aspirations before recommending a course?
+
+Correct:
+So the recommendation can be connected to the learner's actual career goals and situation.
+
+Q5:
+Which mindset best represents the role of an education counsellor?
+
+Correct:
+Understand the learner's needs and guide them toward a relevant educational opportunity.
+
+==================================================
+7. MODULE 2 ASSESSMENT
+==================================================
+
+TITLE:
+Assessment — Introduction to Education Counselling
+
+5 questions.
+
+Q1:
+What is a lead?
+
+Correct:
+A prospective learner/contact who can potentially be engaged for counselling and conversion.
+
+Q2:
+Which teams are identified as major sources of leads?
+
+Correct:
+Lead/data analyst team and marketing team.
+
+Q3:
+What are churned or re-churned leads?
+
+Correct:
+Older enquiries that were not previously followed up or closed and may be re-engaged.
+
+Q4:
+Which combination is useful when evaluating whether a lead fits the ideal customer profile?
+
+Correct:
+Age, educational/background profile, working/studying status, income/affordability and language/rapport.
+
+Q5:
+Why can marketing-generated organic/high-intent leads be valuable?
+
+Correct:
+They may already demonstrate stronger intent because they have actively discovered the offering.
+
+==================================================
+8. MODULE 3 ASSESSMENT
+==================================================
+
+TITLE:
+Assessment — Channels of Connectivity
+
+6 questions.
+
+Q1:
+What are the main connectivity channels taught in this module?
+
+Correct:
+Call, WhatsApp and email.
+
+Q2:
+What is good phone-call hygiene?
+
+Correct:
+Maintain a professional caller identity, including appropriate name/university/company information and profile presentation where applicable.
+
+Q3:
+Why is WhatsApp Business recommended?
+
+Correct:
+It creates a more professional separation between work communication and personal communication.
+
+Q4:
+Which email approach is preferred?
+
+Correct:
+Use an appropriate professional/company/university email identity rather than an unrelated personal email when possible.
+
+Q5:
+Which is the best first WhatsApp outreach style?
+
+Correct:
+Introduce yourself, explain why you are contacting the learner and politely ask for availability/callback.
+
+Q6:
+Which message should a counsellor avoid?
+
+Correct:
+Random "Hi" or "Good morning" messages with no introduction, context or reason for contact.
+
+==================================================
+9. MODULE 4 ASSESSMENT
+==================================================
+
+TITLE:
+Assessment — Content
+
+7 questions.
+
+Q1:
+According to the training, approximately how should a counselling call be balanced?
+
+Correct:
+The learner should drive about 60% of the conversation and the counsellor about 40%.
+
+Q2:
+Why should a counsellor check whether it is a good time to talk?
+
+Correct:
+Because the learner's attention may be limited and the counselling conversation requires meaningful engagement.
+
+Q3:
+Which is an important part of learner profiling?
+
+Correct:
+Understanding factors such as city, language, working/studying status, income band where appropriate and age.
+
+Q4:
+Why can switching into a learner's comfortable regional language help?
+
+Correct:
+It can make the learner more comfortable and help build rapport.
+
+Q5:
+What does "repeat the profile back" mean?
+
+Correct:
+Summarize the learner's situation and aspirations back to them to confirm understanding and build trust.
+
+Q6:
+After profiling, what should the counsellor do when introducing the product?
+
+Correct:
+Explain the product in the context of the learner's aspirations rather than simply delivering a generic pitch.
+
+Q7:
+What is an appropriate next step after a successful phone conversation?
+
+Correct:
+Move the conversation to WhatsApp or email, share relevant material and agree on when to reconnect.
+
+==================================================
+10. MODULE 5 ASSESSMENT
+==================================================
+
+TITLE:
+Assessment — Objection Handling
+
+7 questions.
+
+Q1:
+What should a counsellor do first when a learner says the fees are too high?
+
+Correct:
+Understand the learner's affordability/financial situation and the value factors important to them.
+
+Q2:
+Which is NOT an appropriate comparison factor when handling a competitor objection?
+
+Correct:
+Making unsupported claims about a competitor.
+
+Q3:
+What should a counsellor know before handling market-comparison objections?
+
+Correct:
+Relevant competitor information and a structured USP/value comparison.
+
+Q4:
+When a learner says "I need time to think," what should the counsellor try to discover?
+
+Correct:
+The actual reason or blocker behind the hesitation.
+
+Q5:
+How should a counsellor handle a family-permission objection?
+
+Correct:
+Offer to involve the decision-maker through a suitable conversation such as Google Meet, Zoom or a conference call.
+
+Q6:
+Why is product knowledge important in objection handling?
+
+Correct:
+It allows the counsellor to respond confidently and accurately to learner concerns.
+
+Q7:
+What overall attitude should a counsellor maintain while handling objections?
+
+Correct:
+Calm, patient, composed and confident.
+
+==================================================
+11. MODULE 6 ASSESSMENT
+==================================================
+
+TITLE:
+Assessment — Follow-Up
+
+7 questions.
+
+Q1:
+Why is follow-up important?
+
+Correct:
+Because connected and interested learners often need continued engagement before making a decision.
+
+Q2:
+What is RNR?
+
+Correct:
+Ringing, No Response.
+
+Q3:
+What is the recommended RNR calling pattern described in the training?
+
+Correct:
+Three calls per day at different times across Day 1, Day 2 and Day 3, with WhatsApp follow-up after RNR attempts.
+
+Q4:
+What should a counsellor avoid during RNR follow-up?
+
+Correct:
+Back-to-back/intrusive repeated calls.
+
+Q5:
+Why should connected-lead follow-ups move toward WhatsApp Business?
+
+Correct:
+It provides a professional, convenient channel for continued communication and reduces reliance on ordinary phone calls.
+
+Q6:
+How can AI tools such as ChatGPT or Gemini be used in follow-up?
+
+Correct:
+To help refine professional English or regional-language follow-up messages.
+
+Q7:
+Which communication style should be avoided in professional follow-up?
+
+Correct:
+Friend-like abbreviations and overly casual language.
+
+==================================================
+12. MODULE 7 ASSESSMENT
+==================================================
+
+TITLE:
+Assessment — Closure
+
+7 questions.
+
+Q1:
+According to the training, what should the counsellor remind the learner of during closure?
+
+Correct:
+The aspiration the learner shared during profiling.
+
+Q2:
+Which is an example of a learner aspiration?
+
+Correct:
+Increasing CTC, getting a leadership position or switching career.
+
+Q3:
+What is the purpose of creating urgency?
+
+Correct:
+To encourage the learner to take an appropriate action within the relevant decision/admission timeline instead of unnecessarily postponing it.
+
+Q4:
+Which is an example of a practical immediate action?
+
+Correct:
+Paying an appropriate registration fee or blocking a seat where that process genuinely exists.
+
+Q5:
+What should urgency be based on?
+
+Correct:
+The actual lifetime, deadline, seat availability or admission timeline of the product.
+
+Q6:
+Why should the counsellor discuss the changing industry and AI?
+
+Correct:
+To help the learner understand the consequences of staying stagnant and the relevance of upskilling/career development.
+
+Q7:
+Which is the strongest closure approach?
+
+Correct:
+Reconnect the decision to the learner's own aspiration, address the immediate blocker, create appropriate urgency and guide them toward the simplest actionable next step.
+
+==================================================
+13. NO ASSESSMENT FOR ROLEPLAYS
+==================================================
+
+For Module 8:
+Discovery Roleplay — Kannada
+
+DO NOT generate questions.
+
+For Module 9:
+Closure Roleplay — Kannada
+
+DO NOT generate questions.
+
+Do not allow the frontend to display:
+- Start Assessment
+- Assessment
+- Quiz
+- Score
+- Pass/Fail
+- Retake
+- Assessment completed
+
+for either roleplay.
+
+Instead display a simple informational badge:
+
+"Roleplay / Demonstration"
+
+and optionally:
+
+"No assessment for this module"
+
+==================================================
+14. FINAL ASSESSMENT
+==================================================
+
+Create/restructure the Final Assessment completely.
+
+The Final Assessment must test ONLY Modules 1–7.
+
+ABSOLUTELY EXCLUDE:
+
+Module 8 — Discovery Roleplay — Kannada
+
+Module 9 — Closure Roleplay — Kannada
+
+No question may be derived from either roleplay.
+
+Do not ask:
+- "What did Swathi say to Navya?"
+- "What happened in the Kannada discovery call?"
+- "What did the counsellor say in the closure roleplay?"
+- Any question whose answer depends specifically on watching either roleplay.
+
+The Final Assessment is a theory assessment.
+
+Recommended configuration:
+
+30 questions
+
+40 minutes
+
+75% passing score
+
+Unlimited retakes
+
+Questions distributed across Modules 1–7.
+
+Use the following distribution:
+
+Module 1:
+4 questions
+
+Module 2:
+4 questions
+
+Module 3:
+4 questions
+
+Module 4:
+5 questions
+
+Module 5:
+5 questions
+
+Module 6:
+4 questions
+
+Module 7:
+4 questions
+
+TOTAL:
+30 questions.
+
+==================================================
+15. FINAL ASSESSMENT QUESTION BANK
+==================================================
+
+Create the following 30-question final bank.
+
+Each question has one correct answer.
+
+------------------------------------------
+MODULE 1 — 4 QUESTIONS
+------------------------------------------
+
+F1:
+What distinguishes education counselling from ordinary product sales?
+
+Correct:
+Understanding the learner's profile, situation, aspirations and goals before recommending the educational product.
+
+F2:
+Which approach best represents an education counsellor?
+
+Correct:
+Understand the learner first and connect the relevant course to their career goals.
+
+F3:
+Why is learner aspiration important?
+
+Correct:
+It allows the counsellor to connect the educational opportunity to the learner's desired career outcome.
+
+F4:
+Which set represents the training scope of education sales counselling?
+
+Correct:
+Lead calling, cold calling, lead management, WhatsApp follow-up, regional-language rapport and closing.
+
+------------------------------------------
+MODULE 2 — 4 QUESTIONS
+------------------------------------------
+
+F5:
+Which two major sources of leads are identified?
+
+Correct:
+Lead/data analyst team and marketing team.
+
+F6:
+What is a churned/re-churned lead?
+
+Correct:
+An older enquiry that was not previously followed up or closed and can potentially be re-engaged.
+
+F7:
+Which factors help determine whether a lead fits the ideal customer profile?
+
+Correct:
+Age, background, working/studying status, affordability/income and language/rapport.
+
+F8:
+Why should a counsellor understand lead quality before counselling?
+
+Correct:
+To understand who the learner is and how relevant the offering may be to their profile.
+
+------------------------------------------
+MODULE 3 — 4 QUESTIONS
+------------------------------------------
+
+F9:
+What are the three primary connectivity channels?
+
+Correct:
+Call, WhatsApp and email.
+
+F10:
+What is a professional WhatsApp practice?
+
+Correct:
+Use WhatsApp Business with professional identity/presentation and separate it from personal communication where possible.
+
+F11:
+What should the first outreach message contain?
+
+Correct:
+A professional introduction, reason for contact and a polite request for availability/callback.
+
+F12:
+Why should random "Hi" or "Good morning" messages be avoided?
+
+Correct:
+They provide no context and are not professional outreach.
+
+------------------------------------------
+MODULE 4 — 5 QUESTIONS
+------------------------------------------
+
+F13:
+What conversation balance does the Content module recommend?
+
+Correct:
+Approximately 60% learner and 40% counsellor.
+
+F14:
+Why should the counsellor ask profiling questions before pitching?
+
+Correct:
+To understand the learner and make the counselling relevant rather than delivering a generic pitch.
+
+F15:
+How can regional-language communication help?
+
+Correct:
+It can make the learner more comfortable and strengthen rapport.
+
+F16:
+Why should the counsellor repeat the learner's profile back?
+
+Correct:
+To demonstrate understanding and build trust before recommending the product.
+
+F17:
+What should happen after product counselling?
+
+Correct:
+Move toward an appropriate closure, confirm the preferred communication channel and establish the next reconnect point.
+
+------------------------------------------
+MODULE 5 — 5 QUESTIONS
+------------------------------------------
+
+F18:
+What is the appropriate response to "The fees are too high"?
+
+Correct:
+Understand affordability and connect the product's relevant value to the learner.
+
+F19:
+What should a counsellor prepare for competitor comparisons?
+
+Correct:
+A clear understanding of competitors and relevant USP/value comparisons.
+
+F20:
+What is usually hidden behind "I need time to think"?
+
+Correct:
+An underlying concern or blocker that needs to be understood.
+
+F21:
+How can a family objection be handled?
+
+Correct:
+Offer to involve the decision-maker in a suitable conversation.
+
+F22:
+What qualities should the counsellor demonstrate during objection handling?
+
+Correct:
+Calmness, patience, composure and confidence.
+
+------------------------------------------
+MODULE 6 — 4 QUESTIONS
+------------------------------------------
+
+F23:
+What does RNR stand for?
+
+Correct:
+Ringing, No Response.
+
+F24:
+What is the recommended RNR pattern?
+
+Correct:
+Three attempts per day at different times across Day 1, Day 2 and Day 3, with WhatsApp follow-up.
+
+F25:
+Why move connected follow-ups to WhatsApp Business?
+
+Correct:
+It provides a professional and convenient channel for continued engagement.
+
+F26:
+How can AI assist with follow-up?
+
+Correct:
+It can help refine professional English or regional-language messages.
+
+------------------------------------------
+MODULE 7 — 4 QUESTIONS
+------------------------------------------
+
+F27:
+What should a counsellor remind the learner of during closure?
+
+Correct:
+The learner's own aspiration.
+
+F28:
+What is the purpose of urgency in closure?
+
+Correct:
+To prevent unnecessary postponement and encourage an appropriate action within the actual timeline.
+
+F29:
+Which is an appropriate closure action?
+
+Correct:
+A legitimate registration or seat-blocking step where applicable.
+
+F30:
+What should determine the urgency timeline?
+
+Correct:
+The actual product/admission deadline, seat availability or relevant lifecycle.
+
+==================================================
+16. FINAL ASSESSMENT RULES
+==================================================
+
+Final Assessment:
+
+- 30 questions.
+- 40 minutes.
+- 75% passing score.
+- Only Modules 1–7.
+- No Module 8 content.
+- No Module 9 content.
+- No Kannada roleplay content.
+- No roleplay-specific questions.
+- Questions should test conceptual understanding and application.
+- Avoid obscure wording.
+- Avoid questions where two answers could reasonably be correct.
+- Exactly one correct answer.
+- Shuffle question order.
+- Shuffle answer-option order.
+- Do not reveal answers before submission.
+- Retakes are unlimited.
+
+==================================================
+17. ASSESSMENT SCORING
+==================================================
+
+Module assessments:
+
+Pass:
+70%
+
+Final Assessment:
+
+Pass:
+75%
+
+Do not use different pass percentages elsewhere.
+
+For a module assessment:
+score percentage =
+correct answers / total questions × 100
+
+For Final Assessment:
+score percentage =
+correct answers / 30 × 100
+
+A passing result should be persisted.
+
+A failed result should also be persisted.
+
+Retakes remain available.
+
+Do not lock future modules based on assessment failure unless the existing application already explicitly requires that behaviour.
+
+The user should be able to retake an assessment.
+
+==================================================
+18. ROLEPLAY PROGRESSION
+==================================================
+
+Because Modules 8 and 9 have no assessments, they must not become inaccessible simply because there is no assessment.
+
+They are content modules.
+
+The UI should make the distinction obvious:
+
+THEORY MODULE:
+Video
+→ Assessment
+
+ROLEPLAY MODULE:
+Video
+→ No Assessment
+
+For Modules 8 and 9, after watching the video, show:
+
+"Roleplay complete"
+
+or equivalent simple completion state.
+
+Do NOT show:
+
+"Assessment pending"
+
+==================================================
+19. FINAL ASSESSMENT ACCESS
+==================================================
+
+The Final Assessment should remain available according to the existing application's current rules.
+
+Do not require Module 8 or Module 9 assessments because they do not exist.
+
+Do not create a fake completion requirement for the roleplays.
+
+The Final Assessment's question pool must explicitly reference only:
+
+module-1
+module-2
+module-3
+module-4
+module-5
+module-6
+module-7
+
+Never:
+
+module-8
+module-9
+
+==================================================
+20. DATA MODEL
+==================================================
+
+Update the canonical curriculum configuration to something conceptually equivalent to:
+
+[
+  {
+    id: "module-1",
+    order: 1,
+    title: "Introduction to Counselling",
+    type: "theory",
+    assessmentId: "assessment-module-1"
+  },
+  {
+    id: "module-2",
+    order: 2,
+    title: "Introduction to Education Counselling",
+    type: "theory",
+    assessmentId: "assessment-module-2"
+  },
+  {
+    id: "module-3",
+    order: 3,
+    title: "Channels of Connectivity",
+    type: "theory",
+    assessmentId: "assessment-module-3"
+  },
+  {
+    id: "module-4",
+    order: 4,
+    title: "Content",
+    type: "theory",
+    assessmentId: "assessment-module-4"
+  },
+  {
+    id: "module-5",
+    order: 5,
+    title: "Objection Handling",
+    type: "theory",
+    assessmentId: "assessment-module-5"
+  },
+  {
+    id: "module-6",
+    order: 6,
+    title: "Follow-Up",
+    type: "theory",
+    assessmentId: "assessment-module-6"
+  },
+  {
+    id: "module-7",
+    order: 7,
+    title: "Closure",
+    type: "theory",
+    assessmentId: "assessment-module-7"
+  },
+  {
+    id: "module-8",
+    order: 8,
+    title: "Discovery Roleplay — Kannada",
+    type: "roleplay",
+    assessmentId: null
+  },
+  {
+    id: "module-9",
+    order: 9,
+    title: "Closure Roleplay — Kannada",
+    type: "roleplay",
+    assessmentId: null
+  }
+]
+
+Use the existing project's actual data structure if it differs, but preserve this logical model.
+
+==================================================
+21. VIDEO MAPPING
+==================================================
+
+Do not put actual Google Drive URLs into this prompt or hard-code URLs based on assumptions.
+
+Keep the existing video URL configuration system.
+
+The important mapping is:
+
+module-1:
+intro couneslloing.mp3
+
+module-2:
+Intro Education Counesllor.mp3
+
+module-3:
+Channel.mp3
+Sakshi Channelshp3.mp3
+
+module-4:
+contetn chapter4.mp3
+
+module-5:
+objection_chapter 5.mp4
+
+module-6:
+followupfinalch.mp3
+supporting:
+follow_up_chaprer7.mp3
+
+module-7:
+closuresfinalchp7.mp3
+
+module-8:
+ddiscoverychp1kananada.mp3
+
+module-9:
+cloasurefinalchp3.mp3
+
+Do not treat the supporting recordings as new chapters.
+
+==================================================
+22. DASHBOARD CHANGES
+==================================================
+
+Update the dashboard to display exactly 9 modules.
+
+Order must be:
+
+01
+Introduction to Counselling
+
+02
+Introduction to Education Counselling
+
+03
+Channels of Connectivity
+
+04
+Content
+
+05
+Objection Handling
+
+06
+Follow-Up
+
+07
+Closure
+
+08
+Discovery Roleplay — Kannada
+
+09
+Closure Roleplay — Kannada
+
+For Modules 1–7:
+show:
+Video
+Assessment
+
+For Modules 8–9:
+show:
+Video
+Roleplay / Demonstration
+
+Do not show assessment UI for Modules 8–9.
+
+==================================================
+23. FINAL ASSESSMENT UI
+==================================================
+
+The Final Assessment card should clearly say:
+
+"Final Assessment"
+
+"30 Questions"
+
+"40 Minutes"
+
+"Pass Mark: 75%"
+
+"Based on Modules 1–7"
+
+Do NOT say:
+"Based on all 9 modules."
+
+Because it is NOT based on the roleplays.
+
+The roleplay modules should not be mentioned as part of the Final Assessment scope.
+
+==================================================
+24. REPORTING
+==================================================
+
+Preserve the existing downloadable assessment report functionality.
+
+Update it to reflect:
+
+Module assessments:
+- Module 1
+- Module 2
+- Module 3
+- Module 4
+- Module 5
+- Module 6
+- Module 7
+
+No assessment records:
+- Module 8
+- Module 9
+
+Final Assessment:
+- 30 questions
+- 75% pass mark
+- score based only on Modules 1–7
+
+Do not create blank/zero assessments for Modules 8 and 9.
+
+The report should simply omit them from the assessment-results section or clearly label them as:
+
+"Roleplay — No Assessment"
+
+Do not calculate a score for them.
+
+==================================================
+25. PERSISTENCE
+==================================================
+
+Preserve the existing persistence architecture.
+
+Assessment results must survive:
+- page refresh
+- browser close/reopen
+- logout
+- temporary internet interruption
+
+Logout must NOT delete assessment results.
+
+Do not introduce a server dependency just to implement this restructuring.
+
+Preserve the existing user-identification approach, including hidden UUID/user identity if already implemented.
+
+==================================================
+26. IMPORTANT: DO NOT INVENT TRAINING CONTENT
+==================================================
+
+Do not add generic sales-training questions that are not supported by the supplied curriculum.
+
+Do not introduce concepts such as:
+- arbitrary sales frameworks
+- SPIN selling
+- BANT
+- MEDDIC
+- generic funnel terminology
+- negotiation frameworks
+- CRM terminology
+- unrelated psychology concepts
+
+unless they already exist in the application's source material.
+
+Questions should come from the actual training.
+
+==================================================
+27. IMPORTANT: DO NOT TURN ROLEPLAY INTO THEORY
+==================================================
+
+The Kannada roleplays are demonstrations.
+
+They are NOT:
+
+- theory chapters
+- assessment chapters
+- Final Assessment chapters
+- scored activities
+- mandatory quiz stages
+
+The user should learn from watching them.
+
+The application must reflect that distinction.
+
+==================================================
+28. IMPLEMENTATION SAFETY
+==================================================
+
+Before editing:
+
+1. Inspect the existing project structure.
+2. Find the canonical module/chapter configuration.
+3. Find the assessment question-bank configuration.
+4. Find the Final Assessment configuration.
+5. Find dashboard rendering.
+6. Find assessment-result persistence.
+7. Find PDF/report generation.
+8. Find completion/progress calculations.
+
+Then make the smallest coherent set of changes.
+
+Do NOT blindly create duplicate configuration files.
+
+Do NOT leave old 11-module data structures active.
+
+Do NOT break existing video embedding.
+
+Do NOT break login/logout.
+
+Do NOT break local persistence.
+
+Do NOT break PDF generation.
+
+Do NOT break mobile responsiveness.
+
+==================================================
+29. REQUIRED VALIDATION
+==================================================
+
+After implementation, verify all of the following.
+
+CURRICULUM:
+
+[ ] Exactly 9 modules appear.
+
+[ ] Module 1 is Introduction to Counselling.
+
+[ ] Module 2 is Introduction to Education Counselling.
+
+[ ] Module 3 is Channels of Connectivity.
+
+[ ] Module 4 is Content.
+
+[ ] Module 5 is Objection Handling.
+
+[ ] Module 6 is Follow-Up.
+
+[ ] Module 7 is Closure.
+
+[ ] Module 8 is Discovery Roleplay — Kannada.
+
+[ ] Module 9 is Closure Roleplay — Kannada.
+
+[ ] No 10th/11th chapter exists.
+
+ASSESSMENTS:
+
+[ ] Module 1 has 5 questions.
+
+[ ] Module 2 has 5 questions.
+
+[ ] Module 3 has 6 questions.
+
+[ ] Module 4 has 7 questions.
+
+[ ] Module 5 has 7 questions.
+
+[ ] Module 6 has 7 questions.
+
+[ ] Module 7 has 7 questions.
+
+[ ] Module 8 has ZERO questions.
+
+[ ] Module 9 has ZERO questions.
+
+[ ] Total module-assessment question count is 44.
+
+FINAL:
+
+[ ] Final Assessment has exactly 30 questions.
+
+[ ] Final Assessment has a 40-minute limit.
+
+[ ] Final Assessment pass mark is 75%.
+
+[ ] Final Assessment draws ONLY from Modules 1–7.
+
+[ ] No question comes from Discovery Roleplay.
+
+[ ] No question comes from Closure Roleplay.
+
+[ ] No roleplay-specific question exists.
+
+[ ] Roleplays do not affect Final Assessment eligibility.
+
+PERSISTENCE:
+
+[ ] Assessment results survive refresh.
+
+[ ] Assessment results survive browser restart.
+
+[ ] Logout does not erase assessment data.
+
+[ ] Retakes work.
+
+[ ] PDF/report generation still works.
+
+UI:
+
+[ ] Modules 8 and 9 do not show assessment buttons.
+
+[ ] Modules 8 and 9 show roleplay/demo labelling.
+
+[ ] Dashboard has exactly 9 modules.
+
+[ ] Final Assessment clearly says it covers Modules 1–7.
+
+==================================================
+30. FINAL INSTRUCTION
+==================================================
+
+Do not merely describe what should be changed.
+
+Actually inspect the existing application and implement the restructuring.
+
+Preserve everything that is already working.
+
+The final result must have this exact conceptual architecture:
+
+7 THEORY MODULES
++
+2 KANNADA ROLEPLAYS
+=
+9 TRAINING MODULES
+
+7 MODULE ASSESSMENTS
++
+0 ROLEPLAY ASSESSMENTS
++
+1 FINAL ASSESSMENT COVERING ONLY MODULES 1–7.
+
+Do not create assessment questions for the two roleplays under any circumstance.
+
+Do not include the two roleplays in the Final Assessment.
+
+Do not treat supporting recordings as separate chapters.
+
+Do not revert to the previous 11-chapter architecture.

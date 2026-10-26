@@ -14,7 +14,6 @@ interface VideoPlayerProps {
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   videoUrl,
   title,
-  duration,
   onSimulateWatch,
   playbackSeconds = 0,
   formatPlaybackTime
@@ -65,7 +64,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           Training Video · {title}
         </h4>
         <p className="text-xs text-slate-400 max-w-md mt-1">
-          {duration ? `Duration: ${duration} · ` : ''}Video pending upload. Paste your Google Drive link into <code>src/data/chaptersData.ts</code> to activate this module.
+          Video pending upload. Paste your Google Drive link into <code>src/data/chaptersData.ts</code> to activate this module.
         </p>
         {onSimulateWatch && (
           <div className="pt-3 flex items-center justify-center gap-3 text-[11px] text-slate-400">

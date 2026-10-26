@@ -20,6 +20,10 @@ export interface ChapterInfo {
   assessmentQuestionCount: number;
   passingPercentage: number;
   timeLimitMinutes: number;
+  type: 'theory' | 'roleplay';
+  primaryRecording?: string;
+  supportingRecording?: string;
+  assessmentId?: string | null;
 }
 
 export interface ChapterAssessmentAttempt {
@@ -98,6 +102,7 @@ export interface FinalReportData {
     totalQuestions: number;
     passed: boolean;
     attempts: number;
+    type?: 'theory' | 'roleplay';
   }>;
   finalAttempts: number;
 }
