@@ -20,7 +20,7 @@ export const CHAPTERS_DATA: ChapterInfo[] = [
       'Scope: cold calling, lead calling, lead management, WhatsApp follow-up, regional rapport',
       'Ethical consulting and positioning recommendations to career outcomes'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD01/preview',
+    videoUrl: 'https://drive.google.com/file/d/1mZY1oSPEU8hu66YV_y6DFtih_jjU7v6U/view?usp=drive_link',
     duration: '18 mins',
     assessmentQuestionCount: 5,
     passingPercentage: 70,
@@ -42,7 +42,7 @@ export const CHAPTERS_DATA: ChapterInfo[] = [
       'Evaluating the Ideal Customer Profile (ICP): age, education, work status, income, language',
       'Assessing lead quality and tailoring outreach accordingly'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD02/preview',
+    videoUrl: 'https://drive.google.com/file/d/1ap9yVvFKrHmrluH_sZ9yrDfUj3kI1cxm/view?usp=drive_link',
     duration: '22 mins',
     assessmentQuestionCount: 5,
     passingPercentage: 70,
@@ -64,7 +64,7 @@ export const CHAPTERS_DATA: ChapterInfo[] = [
       'WhatsApp Business: separating work and personal, professional profile status and photo',
       'First outreach protocol: clear introduction, context/reason for contact, polite callback request'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD03/preview',
+    videoUrl: 'https://drive.google.com/file/d/1vdZDRjYRHhT2dVnzCt_h2Y4XnqN-gaUR/view?usp=drive_link',
     duration: '20 mins',
     assessmentQuestionCount: 6,
     passingPercentage: 70,
@@ -87,7 +87,7 @@ export const CHAPTERS_DATA: ChapterInfo[] = [
       'Comprehensive profiling: city, language, working/studying, income band, age',
       'Active rapport: repeat profile back, connect product to aspirations, transition to WhatsApp/email'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD04/preview',
+    videoUrl: 'https://drive.google.com/file/d/16mO5FmR6VgW5hhnemFy7eeahPcSMqQi0/view?usp=drive_link',
     duration: '26 mins',
     assessmentQuestionCount: 7,
     passingPercentage: 70,
@@ -109,7 +109,7 @@ export const CHAPTERS_DATA: ChapterInfo[] = [
       'Competitor objection: structured USP comparison without unsupported disparagement',
       'Hesitation & family: uncover true blocker, offer Google Meet/Zoom with family decision-makers'
     ],
-    videoUrl: 'https://drive.google.com/file/d/1RSjfEVPjYmtb7NPMKRHC7txL5VCG9vFu/view?usp=drive_link',
+    videoUrl: 'https://drive.google.com/file/d/10aSzLbbBhAdCnviwkINuEAfstmPQAaqU/view?usp=drive_link',
     duration: '28 mins',
     assessmentQuestionCount: 7,
     passingPercentage: 70,
@@ -131,7 +131,7 @@ export const CHAPTERS_DATA: ChapterInfo[] = [
       'Calling hygiene: never call back-to-back, avoid friend-like abbreviations or overly casual language',
       'Using AI (ChatGPT/Gemini) to refine polished English and regional follow-up text'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD06/preview',
+    videoUrl: 'https://drive.google.com/file/d/1zZVt0FOkhXGET3D5DCThglFlTC7_W-DQ/view?usp=sharing',
     duration: '24 mins',
     assessmentQuestionCount: 7,
     passingPercentage: 70,
@@ -154,7 +154,7 @@ export const CHAPTERS_DATA: ChapterInfo[] = [
       'Guide toward the simplest actionable step: registration fee or seat blocking',
       'Authentic urgency: tie deadlines to actual admission cohorts, batch start dates, and seat caps'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD07/preview',
+    videoUrl: 'https://drive.google.com/file/d/1mYlz0ZhSW3IFAz8owvnCxmMH-64s5iA-/view?usp=drive_link',
     duration: '25 mins',
     assessmentQuestionCount: 7,
     passingPercentage: 70,
@@ -176,7 +176,7 @@ export const CHAPTERS_DATA: ChapterInfo[] = [
       'Understanding interest in Masters and current compensation benchmarks',
       'Kannada roleplay observation session — no assessment required'
     ],
-    videoUrl: 'https://drive.google.com/file/d/REPLACE_WITH_DRIVE_URL_MOD08/preview',
+    videoUrl: 'https://drive.google.com/file/d/1NY9zY8Oqv-WExekgJCtDo_6v4YWFH0x5/view?usp=drive_link',
     duration: '18 mins',
     assessmentQuestionCount: 0,
     passingPercentage: 0,
@@ -198,7 +198,7 @@ export const CHAPTERS_DATA: ChapterInfo[] = [
       'Involving family through Google Meet and securing concrete callback commitments',
       'Kannada roleplay observation session — no assessment required'
     ],
-    videoUrl: 'https://drive.google.com/file/d/1HfxiEsc113pu2N6mu_Py2zEfbB2a5N2s/view?usp=drive_link',
+    videoUrl: 'https://drive.google.com/file/d/1iE7yr6KgJQcP9-KXnVP93_e_m2tRluZw/view?usp=drive_link',
     duration: '30 mins',
     assessmentQuestionCount: 0,
     passingPercentage: 0,
