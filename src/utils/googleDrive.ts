@@ -35,8 +35,8 @@ export function extractGoogleDriveFileId(rawUrl?: string | null): string | null 
   }
 
   try {
-    // Pattern 1: /file/d/{fileId}
-    const fileDMatch = trimmed.match(/\/file\/d\/([a-zA-Z0-9_-]+)/i);
+    // Pattern 1: /file/d/{fileId} or /file/u/{n}/d/{fileId}
+    const fileDMatch = trimmed.match(/\/file\/(?:u\/\d+\/)?d\/([a-zA-Z0-9_-]+)/i);
     if (fileDMatch && fileDMatch[1]) {
       return fileDMatch[1];
     }
@@ -48,7 +48,7 @@ export function extractGoogleDriveFileId(rawUrl?: string | null): string | null 
     }
 
     // Pattern 3: Bare file ID (Drive file IDs are alphanumeric/dashes/underscores, typically 25-50 chars)
-    if (/^[a-zA-Z0-9_-]{20,60}$/.test(trimmed) && !trimmed.includes('/')) {
+    if (/^[a-zA-Z0-9_-]{15,100}$/.test(trimmed) && !trimmed.includes('/') && !trimmed.includes('.')) {
       return trimmed;
     }
   } catch {

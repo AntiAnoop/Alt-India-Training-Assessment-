@@ -67,3 +67,37 @@ test('normalizeGoogleDriveUrl flags invalid URLs gracefully', () => {
   assert.equal(result.embedUrl, null);
   assert.ok(result.errorMessage);
 });
+
+test('normalizeGoogleDriveUrl handles plain /view without query params', () => {
+  const url = 'https://drive.google.com/file/d/1vdZDRjYRHhT2dVnzCt_h2Y4XnqN-gaUR/view';
+  const result = normalizeGoogleDriveUrl(url);
+  assert.equal(result.status, 'valid');
+  assert.equal(result.fileId, '1vdZDRjYRHhT2dVnzCt_h2Y4XnqN-gaUR');
+  assert.equal(result.embedUrl, 'https://drive.google.com/file/d/1vdZDRjYRHhT2dVnzCt_h2Y4XnqN-gaUR/preview');
+});
+
+test('normalizeGoogleDriveUrl handles /view?usp=sharing', () => {
+  const url = 'https://drive.google.com/file/d/1zZVt0FOkhXGET3D5DCThglFlTC7_W-DQ/view?usp=sharing';
+  const result = normalizeGoogleDriveUrl(url);
+  assert.equal(result.status, 'valid');
+  assert.equal(result.fileId, '1zZVt0FOkhXGET3D5DCThglFlTC7_W-DQ');
+  assert.equal(result.embedUrl, 'https://drive.google.com/file/d/1zZVt0FOkhXGET3D5DCThglFlTC7_W-DQ/preview');
+});
+
+test('normalizeGoogleDriveUrl handles raw Google Drive file ID', () => {
+  const rawId = '1mZY1oSPEU8hu66YV_y6DFtih_jjU7v6U';
+  const result = normalizeGoogleDriveUrl(rawId);
+  assert.equal(result.status, 'valid');
+  assert.equal(result.fileId, '1mZY1oSPEU8hu66YV_y6DFtih_jjU7v6U');
+  assert.equal(result.embedUrl, 'https://drive.google.com/file/d/1mZY1oSPEU8hu66YV_y6DFtih_jjU7v6U/preview');
+});
+
+test('normalizeGoogleDriveUrl cleans up accidental double preview URLs and never outputs /preview/preview', () => {
+  const malformed = 'https://drive.google.com/file/d/1NY9zY8Oqv-WExekgJCtDo_6v4YWFH0x5/preview/preview';
+  const result = normalizeGoogleDriveUrl(malformed);
+  assert.equal(result.status, 'valid');
+  assert.equal(result.fileId, '1NY9zY8Oqv-WExekgJCtDo_6v4YWFH0x5');
+  assert.equal(result.embedUrl, 'https://drive.google.com/file/d/1NY9zY8Oqv-WExekgJCtDo_6v4YWFH0x5/preview');
+  assert.equal(result.embedUrl?.includes('/preview/preview'), false);
+});
+

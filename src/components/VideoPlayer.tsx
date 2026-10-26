@@ -28,6 +28,13 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   useEffect(() => {
     setIsLoading(true);
     setHasError(false);
+
+    // Safety timeout: prevents stuck loading state on mobile browsers with suppressed/delayed iframe load events
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
   }, [normalized.embedUrl]);
 
   const defaultFormatTime = (sec: number) => {
@@ -112,9 +119,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   // Case 4: Valid Google Drive preview URL with responsive 16:9 iframe, loading state, error fallback & fullscreen
   return (
     <div className="relative aspect-video w-full bg-slate-950 overflow-hidden group">
-      {/* Loading Skeleton / Spinner */}
+      {/* Loading Skeleton / Spinner - pointer-events-none ensures touches pass directly to video */}
       {isLoading && !hasError && (
-        <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center text-slate-400 z-10 transition-opacity">
+        <div className="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center text-slate-400 z-10 transition-opacity pointer-events-none select-none">
           <Loader2 className="w-7 h-7 animate-spin text-slate-400 mb-2" />
           <span className="text-xs font-medium text-slate-400 tracking-wide">
             Loading video stream...
@@ -128,7 +135,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           <div className="w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/20 flex items-center justify-center mb-3">
             <AlertTriangle className="w-6 h-6 text-rose-400" />
           </div>
-          <h4 className="text-sm font-semibold text-slate-200">Video Playback Blocked by Browser</h4>
+          <h4 className="text-sm font-semibold text-slate-200">Video couldn't be embedded</h4>
           <p className="text-xs text-slate-400 max-w-sm mt-1">
             Google Drive access may require third-party cookies or permissions in this browser.
           </p>
@@ -143,13 +150,14 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           </a>
         </div>
       ) : (
-        /* The Responsive 16:9 Iframe */
+        /* The Responsive 16:9 Iframe - Mobile and Android compatible */
         <iframe
           src={normalized.embedUrl}
-          className="w-full h-full border-0 absolute inset-0"
-          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+          className="w-full h-full border-0 absolute inset-0 block"
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
           allowFullScreen
           title={title}
+          loading="lazy"
           onLoad={() => setIsLoading(false)}
           onError={() => {
             setIsLoading(false);
@@ -158,13 +166,13 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         />
       )}
 
-      {/* Persistent "Open in Google Drive" external link in top right corner on hover */}
-      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20 pointer-events-auto">
+      {/* Persistent "Open in Google Drive" external link in top right corner on hover (pointer-events-none when hidden so it never blocks mobile taps) */}
+      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20 pointer-events-none group-hover:pointer-events-auto">
         <a
           href={normalized.originalUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-medium bg-black/75 hover:bg-black/90 text-white backdrop-blur-md border border-white/10 shadow-sm transition-all cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-medium bg-black/75 hover:bg-black/90 text-white backdrop-blur-md border border-white/10 shadow-sm transition-all cursor-pointer pointer-events-auto"
           title="Open in Google Drive"
         >
           <ExternalLink className="w-3 h-3 text-slate-300" />
